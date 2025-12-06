@@ -1,3 +1,10 @@
+import Navbar from "./components/navbar/Navbar";
+
 export default function App() {
-  return <div>Hello, Scholar Stream!</div>;
+  return (
+    <div>
+      <Navbar />
+      hello world
+    </div>
+  );
 }
