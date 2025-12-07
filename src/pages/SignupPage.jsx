@@ -1,24 +1,10 @@
-import { useState } from "react";
 import graduationCeremony from "./../assets/graduation-ceremony.png";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import SigninWithGoogle from "../components/socialLogin/SigninWithGoogle";
+import ImagePicker from "../components/imagePicker/ImagePicker";
 
 export default function SignupPage() {
-  const [pickedImage, setPickedImage] = useState(null);
-
-  const { register, handleSubmit } = useForm();
-
-  function handelChangeImage(e) {
-    const file = e.target.files[0];
-    if (!file) return setPickedImage(null);
-
-    const reader = new FileReader();
-
-    reader.onload = () => setPickedImage(reader.result);
-
-    reader.readAsDataURL(file);
-  }
-
+  const { register, handleSubmit, control } = useForm();
   function onSubmit(formData) {
     console.log(formData);
   }
@@ -54,18 +40,20 @@ export default function SignupPage() {
             className='input input-bordered'
             placeholder='Confirm Password'
           />
-          <input
-            onChange={handelChangeImage}
-            type='file'
-            className='file-input file-input-neutral'
-          />
 
-          {pickedImage && (
-            <img
-              className='w-24 h-24 border border-base-300 rounded'
-              src={pickedImage}
-            />
-          )}
+          <Controller
+            name='profileImage'
+            control={control}
+            defaultValue={null}
+            render={({ field }) => (
+              <ImagePicker
+                onChange={(e) => {
+                  const file = e?.target?.files?.[0] || null;
+                  field.onChange(file);
+                }}
+              />
+            )}
+          />
 
           <button className='btn btn-neutral mt-4 w-full'>Signup</button>
 
