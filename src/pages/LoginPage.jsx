@@ -1,12 +1,17 @@
 import { useForm } from "react-hook-form";
 import graduationCeremony from "./../assets/graduation-ceremony.png";
 import { FcGoogle } from "react-icons/fc";
+import useAuthContext from "./../contexts/useAuthContext.jsx";
 
 export default function LoginPage() {
   const { handleSubmit, register } = useForm();
-
+  const { continueWithGoogle } = useAuthContext();
   function onSubmit(formData) {
     console.log(formData);
+  }
+
+  function googleLogin() {
+    continueWithGoogle();
   }
 
   return (
@@ -36,7 +41,7 @@ export default function LoginPage() {
 
           <button className='btn btn-neutral mt-4 w-full'>Login</button>
 
-          <button className='btn btn-outline'>
+          <button onClick={googleLogin} className='btn btn-outline'>
             <FcGoogle />
             Continue with Google
           </button>
