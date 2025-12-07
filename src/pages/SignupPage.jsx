@@ -1,9 +1,12 @@
 import { useState } from "react";
 import graduationCeremony from "./../assets/graduation-ceremony.png";
 import { FcGoogle } from "react-icons/fc";
+import { useForm } from "react-hook-form";
 
 export default function SignupPage() {
   const [pickedImage, setPickedImage] = useState(null);
+
+  const { register, handleSubmit } = useForm();
 
   function handelChangeImage(e) {
     const file = e.target.files[0];
@@ -16,9 +19,12 @@ export default function SignupPage() {
     reader.readAsDataURL(file);
   }
 
+  function onSubmit(formData) {
+    console.log(formData);
+  }
+
   return (
-    <div>
-      {" "}
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div
         style={{ backgroundImage: `url(${graduationCeremony})` }}
         className='bg-no-repeat bg-size-[0%] sm:bg-size-[50%] md:bg-size-[40%] lg:bg-size-[30%] bg-top-left flex justify-end'
@@ -28,6 +34,7 @@ export default function SignupPage() {
 
           <label className='label'>Email</label>
           <input
+            {...register("email")}
             type='email'
             className='input input-bordered'
             placeholder='Email'
@@ -35,12 +42,14 @@ export default function SignupPage() {
 
           <label className='label'>Password</label>
           <input
+            {...register("password")}
             type='password'
             className='input input-bordered'
             placeholder='Password'
           />
           <label className='label'>Confirm Password</label>
           <input
+            {...register("confirmPassword")}
             type='password'
             className='input input-bordered'
             placeholder='Confirm Password'
@@ -66,6 +75,6 @@ export default function SignupPage() {
           </button>
         </fieldset>
       </div>
-    </div>
+    </form>
   );
 }

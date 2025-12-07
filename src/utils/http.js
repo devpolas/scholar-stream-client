@@ -1,0 +1,13 @@
+import axios from "axios";
+
+export async function imgUploadToImgBB(name, image) {
+  const formData = new FormData();
+  formData.append("image", image);
+  formData.append("name", name.replace(/\s+/g, "-").toLowerCase());
+
+  const response = await axios.post(
+    `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API_KEY}`,
+    formData
+  );
+  return response.data.data.url;
+}
