@@ -8,7 +8,7 @@ export default function RootLayout() {
       <nav>
         <Navbar />
       </nav>
-      <main className='flex-1 my-4 p-4'>
+      <main className='flex-1 p-4'>
         <Outlet />
       </main>
       <footer>
