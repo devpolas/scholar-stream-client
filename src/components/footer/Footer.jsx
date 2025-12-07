@@ -6,8 +6,8 @@ import { Link } from "react-router";
 
 export default function Footer() {
   return (
-    <div className='flex flex-col justify-center items-center w-full'>
-      <footer className='footer sm:footer-horizontal bg-base-200 text-base-content p-4'>
+    <div className='flex flex-col justify-center items-center w-full bg-base-200'>
+      <footer className='footer sm:footer-horizontal text-base-content p-4'>
         <nav>
           <h6 className='footer-title'>Services</h6>
           <a className='link link-hover'>Branding</a>
@@ -29,7 +29,7 @@ export default function Footer() {
           <a className='link link-hover'>Cookie policy</a>
         </nav>
       </footer>
-      <footer className='footer bg-base-200 text-base-content border-base-300 border-t px-10 py-4 flex flex-col-reverse sm:flex-row justify-between'>
+      <footer className='footer text-base-content border-base-300 border-t px-10 py-4 flex flex-col-reverse sm:flex-row justify-between'>
         <aside className='grid-flow-col items-center'>
           <Link to={"/"}>
             <img className='w-12' src={logo} alt='Logo' />
@@ -54,6 +54,12 @@ export default function Footer() {
           </div>
         </nav>
       </footer>
+      <aside>
+        <p className='text-sm'>
+          Copyright © {new Date().getFullYear()} - All right reserved by ACME
+          Industries Ltd
+        </p>
+      </aside>
     </div>
   );
 }
