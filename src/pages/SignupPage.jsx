@@ -1,7 +1,7 @@
 import { useState } from "react";
 import graduationCeremony from "./../assets/graduation-ceremony.png";
-import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
+import SigninWithGoogle from "../components/socialLogin/SigninWithGoogle";
 
 export default function SignupPage() {
   const [pickedImage, setPickedImage] = useState(null);
@@ -69,10 +69,7 @@ export default function SignupPage() {
 
           <button className='btn btn-neutral mt-4 w-full'>Signup</button>
 
-          <button className='btn btn-outline'>
-            <FcGoogle />
-            Continue with Google
-          </button>
+          <SigninWithGoogle />
         </fieldset>
       </div>
     </form>
