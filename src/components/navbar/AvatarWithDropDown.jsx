@@ -1,6 +1,8 @@
+import { Link } from "react-router";
+
 export default function AvatarWithDropDown() {
   return (
-    <div className='dropdown dropdown-end'>
+    <div className='dropdown dropdown-end shadow'>
       <div
         tabIndex={0}
         role='button'
@@ -18,13 +20,9 @@ export default function AvatarWithDropDown() {
         className='menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow'
       >
         <li>
-          <a className='justify-between'>
-            Profile
-            <span className='badge'>New</span>
-          </a>
-        </li>
-        <li>
-          <a>Settings</a>
+          <Link to={"/dashboard"} className='justify-between'>
+            Dashboard
+          </Link>
         </li>
         <li>
           <a>Logout</a>

@@ -1,6 +1,10 @@
 import { SlMenu } from "react-icons/sl";
 import logo from "./../../assets/logo.png";
 import { Link } from "react-router";
+import AvatarWithDropDown from "./AvatarWithDropDown";
+import AuthButtons from "./AuthButtons";
+
+const user = true;
 
 export default function Navbar() {
   const links = (
@@ -10,9 +14,6 @@ export default function Navbar() {
       </li>
       <li>
         <Link to={"/all-scholarships"}>All Scholarships</Link>
-      </li>
-      <li>
-        <Link to={"/profile"}>Profile</Link>
       </li>
     </>
   );
@@ -38,20 +39,7 @@ export default function Navbar() {
         <ul className='menu menu-horizontal px-1'>{links}</ul>
       </div>
       <div className='navbar-end'>
-        <div className='flex flex-row gap-2'>
-          <Link
-            to={"/login"}
-            className='btn btn-outline btn-primary btn-xs sm:btn-sm md:btn-md'
-          >
-            Login
-          </Link>
-          <Link
-            to={"/signup"}
-            className='btn btn-secondary btn-xs sm:btn-sm md:btn-md'
-          >
-            Signup
-          </Link>
-        </div>
+        {user ? <AvatarWithDropDown /> : <AuthButtons />}
       </div>
     </div>
   );

@@ -4,7 +4,8 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import ScholarshipsPage from "../pages/ScholarshipsPage";
-import ProfilePage from "../pages/ProfilePage";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Dashboard from "../pages/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
       { path: "login", Component: LoginPage },
       { path: "signup", Component: SignupPage },
       { path: "all-scholarships", Component: ScholarshipsPage },
-      { path: "profile", Component: ProfilePage },
+      {
+        path: "dashboard",
+        Component: DashboardLayout,
+        children: [{ index: true, Component: Dashboard }],
+      },
     ],
   },
 ]);
