@@ -56,8 +56,8 @@ export default function Footer() {
       </footer>
       <aside>
         <p className='text-sm'>
-          Copyright © {new Date().getFullYear()} - All right reserved by ACME
-          Industries Ltd
+          Copyright © {new Date().getFullYear()} - All right reserved by Scholar
+          Stream
         </p>
       </aside>
     </div>
