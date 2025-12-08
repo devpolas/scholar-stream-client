@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function AuthButtons() {
   return (
     <div className='flex flex-row gap-2'>

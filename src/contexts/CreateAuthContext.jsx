@@ -8,6 +8,5 @@ const AuthContext = createContext({
   signin: async () => {},
   logout: async () => {},
   isLoading: false,
-  isError: "",
 });
 export default AuthContext;

@@ -3,10 +3,10 @@ import logo from "./../../assets/logo.png";
 import { Link } from "react-router";
 import AvatarWithDropDown from "./AvatarWithDropDown";
 import AuthButtons from "./AuthButtons";
-
-const user = true;
+import useAuthContext from "../../contexts/useAuthContext";
 
 export default function Navbar() {
+  const { user } = useAuthContext();
   const links = (
     <>
       <li>

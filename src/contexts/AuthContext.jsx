@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import auth from "../firebase/firebase.init";
+import appAuth from "../firebase/firebase.init";
 import AuthContext from "./CreateAuthContext";
 import {
   createUserWithEmailAndPassword,
+  getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -11,10 +12,10 @@ import {
 } from "firebase/auth";
 
 export default function AuthContextProvider({ children }) {
+  const auth = getAuth();
   const [user, setUser] = useState(null);
   const googleAuthProvider = new GoogleAuthProvider();
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState("");
 
   useEffect(function () {
     const timeout = setTimeout(() => setIsLoading(false), 8000);
@@ -34,13 +35,7 @@ export default function AuthContextProvider({ children }) {
 
   async function continueWithGoogle() {
     setIsLoading(true);
-    try {
-      return await signInWithPopup(auth, googleAuthProvider);
-    } catch (error) {
-      if (error) {
-        setIsError("Google signin Failed. Please try again.");
-      }
-    }
+    return await signInWithPopup(appAuth, googleAuthProvider);
   }
 
   async function afterUpdate() {
@@ -53,35 +48,17 @@ export default function AuthContextProvider({ children }) {
 
   async function signup(email, password) {
     setIsLoading(true);
-    try {
-      return await createUserWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      if (error) {
-        setIsError("Signup Failed. Please try again.");
-      }
-    }
+    return await createUserWithEmailAndPassword(appAuth, email, password);
   }
 
   async function signin(email, password) {
     setIsLoading(true);
-    try {
-      return await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      if (error) {
-        setIsError("Signin Failed. Please try again.");
-      }
-    }
+    return await signInWithEmailAndPassword(appAuth, email, password);
   }
 
   async function logout() {
     setIsLoading(true);
-    try {
-      return await signOut(auth);
-    } catch (error) {
-      if (error) {
-        setIsError("Signout Failed. Please try again.");
-      }
-    }
+    return await signOut(appAuth);
   }
 
   const value = {
@@ -92,7 +69,6 @@ export default function AuthContextProvider({ children }) {
     signin,
     logout,
     isLoading,
-    isError,
   };
 
   return <AuthContext value={value}>{children}</AuthContext>;
