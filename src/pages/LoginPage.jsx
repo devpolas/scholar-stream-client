@@ -17,7 +17,7 @@ export default function LoginPage() {
         toast.success("Login Successful");
         navigate(location?.state || "/");
       })
-      .catch(() => toast.error("Login Failed"));
+      .catch(() => toast.error("Invalid Credentials"));
   }
 
   return (
@@ -31,7 +31,7 @@ export default function LoginPage() {
 
           <label className='label'>Email</label>
           <input
-            {...register("email")}
+            {...register("email", { required: true })}
             type='email'
             className='input input-bordered'
             placeholder='Email'
@@ -39,7 +39,7 @@ export default function LoginPage() {
 
           <label className='label'>Password</label>
           <input
-            {...register("password")}
+            {...register("password", { required: true })}
             type='password'
             className='input input-bordered'
             placeholder='Password'
