@@ -15,7 +15,7 @@ export default function LoginPage() {
     signin(email, password)
       .then(() => {
         toast.success("Login Successful");
-        navigate(location?.state || "/");
+        navigate(location?.state || "/", { replace: true });
       })
       .catch(() => toast.error("Invalid Credentials"));
   }

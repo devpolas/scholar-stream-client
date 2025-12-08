@@ -40,12 +40,17 @@ const router = createBrowserRouter([
       { path: "scholarship/:id", Component: ScholarshipDetails },
       {
         path: "dashboard",
-        element: (
-          <PrivateRoute>
-            <DashboardLayout />
-          </PrivateRoute>
-        ),
-        children: [{ index: true, Component: Dashboard }],
+        Component: DashboardLayout,
+        children: [
+          {
+            index: true,
+            element: (
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            ),
+          },
+        ],
       },
       { path: "*", Component: ErrorPage },
     ],
