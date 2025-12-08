@@ -1,11 +1,23 @@
 import { useForm } from "react-hook-form";
 import graduationCeremony from "./../assets/graduation-ceremony.png";
 import SigninWithGoogle from "../components/socialLogin/SigninWithGoogle";
+import useAuthContext from "../contexts/useAuthContext";
+import toast from "react-hot-toast";
+import { useLocation, useNavigate } from "react-router";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { handleSubmit, register } = useForm();
+  const { signin } = useAuthContext();
   function onSubmit(formData) {
-    console.log(formData);
+    const { email, password } = formData;
+    signin(email, password)
+      .then(() => {
+        toast.success("Login Successful");
+        navigate(location?.state || "/");
+      })
+      .catch(() => toast.error("Login Failed"));
   }
 
   return (

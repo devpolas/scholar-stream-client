@@ -1,6 +1,8 @@
 import { Link } from "react-router";
+import useAuthContext from "../../contexts/useAuthContext";
 
 export default function AvatarWithDropDown() {
+  const { user, logout } = useAuthContext();
   return (
     <div className='dropdown dropdown-end shadow'>
       <div
@@ -9,10 +11,7 @@ export default function AvatarWithDropDown() {
         className='btn btn-ghost btn-circle avatar'
       >
         <div className='w-10 rounded-full'>
-          <img
-            alt='Tailwind CSS Navbar component'
-            src='https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
-          />
+          <img alt='Tailwind CSS Navbar component' src={user?.photoURL} />
         </div>
       </div>
       <ul
@@ -25,7 +24,7 @@ export default function AvatarWithDropDown() {
           </Link>
         </li>
         <li>
-          <a>Logout</a>
+          <a onClick={logout}>Logout</a>
         </li>
       </ul>
     </div>

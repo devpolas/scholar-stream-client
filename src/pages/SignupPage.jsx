@@ -22,12 +22,12 @@ export default function SignupPage() {
     console.log(formData);
     const { fullname, email, password, profileImage } = formData;
 
+    const photoUrl = await imgUploadToImgBB(fullname, profileImage[0]);
     await signup(email, password)
       .then((result) => {
-        const photoUrl = imgUploadToImgBB(fullname, profileImage[0]);
         updateProfile(result.user, {
           displayName: fullname,
-          photoUrl: photoUrl,
+          photoURL: photoUrl,
         });
 
         toast.success("Signup Successful");
