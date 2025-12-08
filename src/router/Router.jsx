@@ -7,6 +7,7 @@ import ScholarshipsPage from "../pages/ScholarshipsPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard";
 import ScholarshipDetails from "../pages/ScholarshipDetails";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
         Component: DashboardLayout,
         children: [{ index: true, Component: Dashboard }],
       },
+      { path: "*", Component: ErrorPage },
     ],
   },
 ]);
