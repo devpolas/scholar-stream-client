@@ -6,6 +6,7 @@ import SignupPage from "../pages/SignupPage";
 import ScholarshipsPage from "../pages/ScholarshipsPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard";
+import ScholarshipDetails from "../pages/ScholarshipDetails";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "login", Component: LoginPage },
       { path: "signup", Component: SignupPage },
       { path: "all-scholarships", Component: ScholarshipsPage },
+      { path: "scholarship/:id", Component: ScholarshipDetails },
       {
         path: "dashboard",
         Component: DashboardLayout,
