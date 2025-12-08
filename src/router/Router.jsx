@@ -8,6 +8,8 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard";
 import ScholarshipDetails from "../pages/ScholarshipDetails";
 import ErrorPage from "../pages/ErrorPage";
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -18,13 +20,31 @@ const router = createBrowserRouter([
         index: true,
         Component: HomePage,
       },
-      { path: "login", Component: LoginPage },
-      { path: "signup", Component: SignupPage },
+      {
+        path: "login",
+        element: (
+          <PublicRoute>
+            <LoginPage />
+          </PublicRoute>
+        ),
+      },
+      {
+        path: "signup",
+        element: (
+          <PublicRoute>
+            <SignupPage />
+          </PublicRoute>
+        ),
+      },
       { path: "all-scholarships", Component: ScholarshipsPage },
       { path: "scholarship/:id", Component: ScholarshipDetails },
       {
         path: "dashboard",
-        Component: DashboardLayout,
+        element: (
+          <PrivateRoute>
+            <DashboardLayout />
+          </PrivateRoute>
+        ),
         children: [{ index: true, Component: Dashboard }],
       },
       { path: "*", Component: ErrorPage },
