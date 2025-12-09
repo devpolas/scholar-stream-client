@@ -47,7 +47,7 @@ export default function ScholarshipCard({ scholarship }) {
 
         {/* View Details Button */}
         <div className='card-actions justify-end mt-4'>
-          <Link to={`/scholarships/${_id}`}>
+          <Link to={`/scholarship/${_id}`}>
             <button className='btn btn-primary btn-sm'>View Details</button>
           </Link>
         </div>

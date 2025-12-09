@@ -1,4 +1,13 @@
-export default function ScholarshipDetails({ scholarship }) {
+import { useParams, useRouteLoaderData } from "react-router";
+
+export default function ScholarshipDetails() {
+  const data = useRouteLoaderData("root");
+
+  const { id } = useParams();
+  console.log(id);
+
+  const scholarship = [...data].find((el) => parseInt(el._id) === parseInt(id));
+  console.log(scholarship);
   const {
     scholarshipName,
     universityName,
