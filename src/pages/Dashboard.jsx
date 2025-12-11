@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./../hooks/useAxios.jsx";
-import UserDashboard from "./UserDashboard.jsx";
-import ModeratorDashboard from "./ModeratorDashboard.jsx";
-import AdminDashboard from "./AdminDashboard.jsx";
+import StudentDashboard from "../dashboard/StudentDashboard.jsx";
+import ModeratorDashboard from "../dashboard/ModeratorDashboard.jsx";
+import AdminDashboard from "../dashboard/AdminDashboard.jsx";
 export default function Dashboard() {
   const axiosSecure = useAxiosSecure();
   const { isLoading, data: currentUser } = useQuery({
@@ -20,7 +20,7 @@ export default function Dashboard() {
 
   let dashboard;
   if (role === "student") {
-    dashboard = <UserDashboard />;
+    dashboard = <StudentDashboard />;
   } else if (role === "moderator") {
     dashboard = <ModeratorDashboard />;
   } else if (role === "admin") {
