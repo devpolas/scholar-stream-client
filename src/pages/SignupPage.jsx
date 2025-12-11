@@ -7,6 +7,7 @@ import { imgUploadToImgBB } from "../utils/http";
 import { updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -19,22 +20,30 @@ export default function SignupPage() {
   const { signup } = useAuthContext();
   const password = useWatch({ name: "password", control });
   async function onSubmit(formData) {
-    console.log(formData);
     const { fullname, email, password, profileImage } = formData;
 
     const photoUrl = await imgUploadToImgBB(fullname, profileImage[0]);
-    await signup(email, password)
-      .then((result) => {
-        updateProfile(result.user, {
-          displayName: fullname,
-          photoURL: photoUrl,
-        });
+    try {
+      const { user } = await signup(email, password);
 
-        toast.success("Signup Successful");
+      await updateProfile(user, {
+        displayName: fullname,
+        photoURL: photoUrl,
+      });
 
-        navigate("/");
-      })
-      .catch(() => toast.error("Signup Failed"));
+      await axios.post("http://localhost:8000/api/v1/users", {
+        name: fullname,
+        email,
+        image: photoUrl,
+      });
+
+      toast.success("Signup Successful");
+      navigate("/");
+    } catch (error) {
+      if (error) {
+        toast.error("Signup Failed");
+      }
+    }
   }
 
   return (
