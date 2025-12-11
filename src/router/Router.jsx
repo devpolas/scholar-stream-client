@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     path: "/",
     Component: RootLayout,
     id: "root",
-    loader: async () => fetch("/data.json"),
+    loader: async () => fetch("http://localhost:8000/api/v1/scholarships"),
     children: [
       {
         index: true,

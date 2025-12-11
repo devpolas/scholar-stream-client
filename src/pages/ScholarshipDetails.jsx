@@ -1,13 +1,17 @@
 import { useParams, useRouteLoaderData } from "react-router";
+import useAxiosSecure from "../hooks/useAxios";
+import toast from "react-hot-toast";
 
 export default function ScholarshipDetails() {
+  const axiosSecure = useAxiosSecure();
   const data = useRouteLoaderData("root");
 
   const { id } = useParams();
-  console.log(id);
+  const scholarshipId = id;
 
-  const scholarship = [...data].find((el) => parseInt(el._id) === parseInt(id));
-  console.log(scholarship);
+  const scholarship = [...data.data].find(
+    (el) => parseInt(el._id) === parseInt(id)
+  );
   const {
     scholarshipName,
     universityName,
@@ -25,6 +29,25 @@ export default function ScholarshipDetails() {
     scholarshipPostDate,
     postedUserEmail,
   } = scholarship;
+
+  async function handleApplication() {
+    try {
+      const result = await axiosSecure.post(
+        `/scholarships/${scholarshipId}/applications`,
+        {}
+      );
+
+      if (result.status === 201) {
+        toast.success("Successfully applied!");
+      } else {
+        toast.error("Failed to apply!");
+      }
+    } catch (error) {
+      toast.error("Failed to apply!");
+      console.error(error);
+    }
+  }
+
   return (
     <div className='max-w-6xl mx-auto px-4 py-10'>
       {/* Header */}
@@ -114,7 +137,12 @@ export default function ScholarshipDetails() {
 
       {/* Action Button */}
       <div className='mt-10 flex justify-center'>
-        <button className='btn btn-primary px-10 text-lg'>Apply Now</button>
+        <button
+          onClick={handleApplication}
+          className='btn btn-primary px-10 text-lg'
+        >
+          Apply Now
+        </button>
       </div>
     </div>
   );

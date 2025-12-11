@@ -7,7 +7,7 @@ import TopScholarships from "../components/homepage/TopScholarships";
 
 export default function HomePage() {
   const data = useRouteLoaderData("root");
-  const scholarshipData = [...data].slice(0, 6);
+  const scholarshipData = [...data.data].slice(0, 6);
   return (
     <div>
       <HeroSection />

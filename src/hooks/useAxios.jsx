@@ -10,11 +10,16 @@ export default function useAxiosSecure() {
   const { user } = useAuthContext();
 
   useEffect(() => {
-    instance.interceptors.request.use((config) => {
-      config.headers.Authorization = `Bearer ${user?.accessToken}`;
+    if (!user) return;
+    const requestInterceptor = instance.interceptors.request.use((config) => {
+      const token = user?.accessToken;
+      config.headers.Authorization = `Bearer ${token}`;
       return config;
     });
-  }, [user]);
 
+    return () => {
+      instance.interceptors.request.eject(requestInterceptor);
+    };
+  }, [user]);
   return instance;
 }
