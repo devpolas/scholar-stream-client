@@ -1,6 +1,8 @@
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { FaUsersViewfinder } from "react-icons/fa6";
 import { IoMdAnalytics } from "react-icons/io";
+import { GrAppleAppStore } from "react-icons/gr";
+
 import { Outlet } from "react-router";
 
 export default function AdminDashboard() {
@@ -55,7 +57,7 @@ export default function AdminDashboard() {
                 data-tip='Applications'
               >
                 {/* Settings icon */}
-                <FaUsersViewfinder />
+                <GrAppleAppStore />
                 <span className='is-drawer-close:hidden'>Applications</span>
               </button>
             </li>
