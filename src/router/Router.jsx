@@ -5,11 +5,11 @@ import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import ScholarshipsPage from "../pages/ScholarshipsPage";
 import DashboardLayout from "../layouts/DashboardLayout";
-import Dashboard from "../pages/Dashboard";
 import ScholarshipDetails from "../pages/ScholarshipDetails";
 import ErrorPage from "../pages/ErrorPage";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import Applications from "../components/applications/Applications";
 
 const router = createBrowserRouter([
   {
@@ -42,16 +42,24 @@ const router = createBrowserRouter([
       { path: "scholarship/:id", Component: ScholarshipDetails },
       {
         path: "dashboard",
-        Component: DashboardLayout,
+        element: (
+          <PrivateRoute>
+            <DashboardLayout />
+          </PrivateRoute>
+        ),
         children: [
           {
-            index: true,
-            element: (
-              <PrivateRoute>
-                <Dashboard />
-              </PrivateRoute>
-            ),
+            index: "true",
+            path: "applications",
+            Component: Applications,
           },
+          { path: "reviews" },
+          { path: "payments" },
+          { path: "add-scholarship" },
+          { path: "users" },
+          { path: "analytics" },
+          { path: "payment-success" },
+          { path: "payment-failed" },
         ],
       },
       { path: "*", Component: ErrorPage },
