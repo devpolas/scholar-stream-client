@@ -52,6 +52,18 @@ export default function AdminDashboard() {
             <li>
               <button
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
+                data-tip='Applications'
+              >
+                {/* Settings icon */}
+                <FaUsersViewfinder />
+                <span className='is-drawer-close:hidden'>Applications</span>
+              </button>
+            </li>
+
+            {/* List item */}
+            <li>
+              <button
+                className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Add Scholarship'
               >
                 {/* Home icon */}
@@ -60,17 +72,6 @@ export default function AdminDashboard() {
               </button>
             </li>
 
-            {/* List item */}
-            <li>
-              <button
-                className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
-                data-tip='Applications'
-              >
-                {/* Settings icon */}
-                <FaUsersViewfinder />
-                <span className='is-drawer-close:hidden'>Applications</span>
-              </button>
-            </li>
             {/* List item */}
             <li>
               <button
