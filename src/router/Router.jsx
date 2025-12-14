@@ -16,11 +16,10 @@ import UsersPage from "../pages/UsersPage";
 import PaymentsPage from "../pages/PaymentsPage";
 import PaymentsSuccessPage from "../pages/PaymentsSuccessPage";
 import PaymentsFailedPage from "../pages/PaymentsFailedPage";
-import AnalyticsPage from "../pages/AnalyticsPage";
-
-// import PublicRoute from "./PublicRoute";
-import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard";
+
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -37,11 +36,20 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <LoginPage />,
+        element: (
+          <PublicRoute>
+            <LoginPage />
+          </PublicRoute>
+        ),
       },
       {
         path: "signup",
-        element: <SignupPage />,
+        element: (
+          <PublicRoute>
+            {" "}
+            <SignupPage />
+          </PublicRoute>
+        ),
       },
       { path: "all-scholarships", Component: ScholarshipsPage },
       { path: "scholarship/:id", Component: ScholarshipDetails },
@@ -64,7 +72,6 @@ const router = createBrowserRouter([
           { path: "reviews", Component: ReviewsPage },
           { path: "add-scholarship", Component: AddScholarshipPage },
           { path: "users", Component: UsersPage },
-          { path: "analytics", Component: AnalyticsPage },
           { path: "payments", Component: PaymentsPage },
           { path: "payment-success", Component: PaymentsSuccessPage },
           { path: "payment-failed", Component: PaymentsFailedPage },

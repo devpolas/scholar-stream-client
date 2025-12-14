@@ -6,7 +6,7 @@ export default function ApplicationTable({ applications }) {
         {/* head */}
         <thead>
           <tr>
-            <th></th>
+            <th>Serial No</th>
             <th>University Name</th>
             <th>University Address</th>
             <th>Feedback</th>
