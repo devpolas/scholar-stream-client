@@ -1,9 +1,8 @@
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { FaUsersViewfinder } from "react-icons/fa6";
-import { IoMdAnalytics } from "react-icons/io";
+import { IoHome } from "react-icons/io5";
 import { GrAppleAppStore } from "react-icons/gr";
-
-import { Outlet } from "react-router";
+import { Outlet, NavLink } from "react-router";
 
 export default function AdminDashboard() {
   return (
@@ -52,51 +51,53 @@ export default function AdminDashboard() {
           <ul className='menu w-full grow'>
             {/* List item */}
             <li>
-              <button
+              <NavLink
+                to={"/dashboard"}
+                className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
+                data-tip='Home'
+              >
+                {/* Home icon */}
+                <IoHome />
+                <span className='is-drawer-close:hidden'>Home</span>
+              </NavLink>
+            </li>
+            {/* List item */}
+            <li>
+              <NavLink
+                to={"/dashboard/applications"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Applications'
               >
                 {/* Settings icon */}
                 <GrAppleAppStore />
                 <span className='is-drawer-close:hidden'>Applications</span>
-              </button>
+              </NavLink>
             </li>
 
             {/* List item */}
             <li>
-              <button
+              <NavLink
+                to={"/dashboard/add-scholarship"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Add Scholarship'
               >
                 {/* Home icon */}
                 <AiOutlineFileAdd />
                 <span className='is-drawer-close:hidden'>Add Scholarship</span>
-              </button>
+              </NavLink>
             </li>
 
             {/* List item */}
             <li>
-              <button
+              <NavLink
+                to={"/dashboard/users"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Manage Users'
               >
                 {/* Settings icon */}
                 <FaUsersViewfinder />
                 <span className='is-drawer-close:hidden'>Manage Users</span>
-              </button>
-            </li>
-
-            {/* List item */}
-
-            <li>
-              <button
-                className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
-                data-tip='Analytics'
-              >
-                {/* Settings icon */}
-                <IoMdAnalytics />
-                <span className='is-drawer-close:hidden'>Analytics</span>
-              </button>
+              </NavLink>
             </li>
           </ul>
         </div>

@@ -1,6 +1,7 @@
 import { GrAppleAppStore } from "react-icons/gr";
+import { IoHome } from "react-icons/io5";
 import { MdReviews } from "react-icons/md";
-import { Outlet } from "react-router";
+import { Outlet, NavLink } from "react-router";
 export default function ModeratorDashboard() {
   return (
     <div className='drawer lg:drawer-open'>
@@ -48,26 +49,40 @@ export default function ModeratorDashboard() {
           <ul className='menu w-full grow'>
             {/* List item */}
             <li>
-              <button
+              <NavLink
+                to={"/dashboard"}
+                className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
+                data-tip='Home'
+              >
+                {/* Home icon */}
+                <IoHome />
+                <span className='is-drawer-close:hidden'>Home</span>
+              </NavLink>
+            </li>
+            {/* List item */}
+            <li>
+              <NavLink
+                to={"/dashboard/applications"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Applications'
               >
                 {/* Home icon */}
                 <GrAppleAppStore />
                 <span className='is-drawer-close:hidden'>Applications</span>
-              </button>
+              </NavLink>
             </li>
 
             {/* List item */}
             <li>
-              <button
+              <NavLink
+                to={"/dashboard/reviews"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Reviews'
               >
                 {/* Settings icon */}
                 <MdReviews />
                 <span className='is-drawer-close:hidden'>Reviews</span>
-              </button>
+              </NavLink>
             </li>
           </ul>
         </div>

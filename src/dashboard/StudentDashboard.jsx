@@ -1,3 +1,4 @@
+import { IoHome } from "react-icons/io5";
 import { GrAppleAppStore } from "react-icons/gr";
 import { MdReviews } from "react-icons/md";
 import { MdPayments } from "react-icons/md";
@@ -53,6 +54,18 @@ export default function StudentDashboard() {
               <NavLink
                 to={"/dashboard"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
+                data-tip='Home'
+              >
+                {/* Home icon */}
+                <IoHome />
+                <span className='is-drawer-close:hidden'>Home</span>
+              </NavLink>
+            </li>
+            {/* List item */}
+            <li>
+              <NavLink
+                to={"/dashboard/applications"}
+                className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Applications'
               >
                 {/* Home icon */}
@@ -63,27 +76,29 @@ export default function StudentDashboard() {
 
             {/* List item */}
             <li>
-              <button
+              <NavLink
+                to={"/dashboard/reviews"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Reviews'
               >
                 {/* Settings icon */}
                 <MdReviews />
                 <span className='is-drawer-close:hidden'>Reviews</span>
-              </button>
+              </NavLink>
             </li>
 
             {/* List item */}
 
             <li>
-              <button
+              <NavLink
+                to={"/dashboard/payments"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Payments'
               >
                 {/* Settings icon */}
                 <MdPayments />
                 <span className='is-drawer-close:hidden'>Payments</span>
-              </button>
+              </NavLink>
             </li>
           </ul>
         </div>

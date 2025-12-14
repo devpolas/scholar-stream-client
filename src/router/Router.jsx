@@ -20,6 +20,7 @@ import AnalyticsPage from "../pages/AnalyticsPage";
 
 // import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../pages/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
+            Component: Dashboard,
+          },
+          {
+            path: "applications",
             Component: ApplicationsPage,
           },
           { path: "reviews", Component: ReviewsPage },
