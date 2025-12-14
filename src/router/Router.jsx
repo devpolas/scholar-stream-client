@@ -18,13 +18,15 @@ import PaymentsSuccessPage from "../pages/PaymentsSuccessPage";
 import PaymentsFailedPage from "../pages/PaymentsFailedPage";
 import AnalyticsPage from "../pages/AnalyticsPage";
 
-import PublicRoute from "./PublicRoute";
+// import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
+    hydrateFallbackElement: <p>Loading.....</p>,
+    errorElement: <ErrorPage />,
     id: "root",
     loader: async () => fetch("http://localhost:8000/api/v1/scholarships"),
     children: [
@@ -34,19 +36,11 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: (
-          <PublicRoute>
-            <LoginPage />
-          </PublicRoute>
-        ),
+        element: <LoginPage />,
       },
       {
         path: "signup",
-        element: (
-          <PublicRoute>
-            <SignupPage />
-          </PublicRoute>
-        ),
+        element: <SignupPage />,
       },
       { path: "all-scholarships", Component: ScholarshipsPage },
       { path: "scholarship/:id", Component: ScholarshipDetails },

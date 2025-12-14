@@ -5,19 +5,20 @@ import useAxiosSecure from "./../hooks/useAxios";
 import StudentDashboard from "../dashboard/StudentDashboard";
 import ModeratorDashboard from "../dashboard/ModeratorDashboard";
 import AdminDashboard from "../dashboard/AdminDashboard";
+import { Outlet } from "react-router";
 
 export default function DashboardLayout() {
-  const { isLoading: fireLoading, user } = useAuthContext();
+  const { user } = useAuthContext();
   const axiosSecure = useAxiosSecure();
-  const { isLoading: queryLoading, data: currentUser } = useQuery({
+  const { isLoading, data: currentUser } = useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      return axiosSecure.get(`/users/me`);
+      return await axiosSecure.get(`/users/me`);
     },
   });
 
-  if (queryLoading) {
-    return;
+  if (isLoading) {
+    return <p>Loading.....</p>;
   }
 
   const role = currentUser.data?.data?.role;
@@ -34,7 +35,8 @@ export default function DashboardLayout() {
   return (
     <div>
       <Profile user={user} />
-      {fireLoading ? <p>Loading.....</p> : dashboard}
+      {dashboard}
+      <Outlet />
     </div>
   );
 }

@@ -51,7 +51,7 @@ export default function StudentDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/applications"}
+                to={"/dashboard"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Applications'
               >
