@@ -3,7 +3,6 @@ import appAuth from "../firebase/firebase.init";
 import AuthContext from "./CreateAuthContext";
 import {
   createUserWithEmailAndPassword,
-  getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -12,16 +11,14 @@ import {
 } from "firebase/auth";
 
 export default function AuthContextProvider({ children }) {
-  const auth = getAuth();
   const [user, setUser] = useState(null);
   const googleAuthProvider = new GoogleAuthProvider();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(function () {
-    const timeout = setTimeout(() => setIsLoading(false), 8000);
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(appAuth, (currentUser) => {
       if (currentUser) {
-        setUser({ ...currentUser });
+        setUser(currentUser);
       } else {
         setUser(null);
       }
@@ -29,7 +26,6 @@ export default function AuthContextProvider({ children }) {
     });
     return () => {
       unsubscribe();
-      clearTimeout(timeout);
     };
   }, []);
 
@@ -40,9 +36,9 @@ export default function AuthContextProvider({ children }) {
 
   async function afterUpdate() {
     setIsLoading(true);
-    if (auth.currentUser) {
-      await auth.currentUser.reload();
-      setUser({ ...auth.currentUser });
+    if (appAuth.currentUser) {
+      await appAuth.currentUser.reload();
+      setUser({ ...appAuth.currentUser });
     }
   }
 

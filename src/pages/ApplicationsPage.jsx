@@ -7,7 +7,7 @@ export default function ApplicationsPage() {
   const { isLoading, data } = useQuery({
     queryKey: ["applications"],
     queryFn: async () => {
-      return axiosSecure.get("/applications");
+      return await axiosSecure.get("/applications");
     },
   });
 

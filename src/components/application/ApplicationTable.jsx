@@ -20,7 +20,11 @@ export default function ApplicationTable({ applications }) {
         <tbody>
           {/* row 1 */}
           {applications.map((application, i) => (
-            <ApplicationTableRow application={application} index={i + 1} />
+            <ApplicationTableRow
+              application={application}
+              index={i + 1}
+              key={i + 1}
+            />
           ))}
         </tbody>
       </table>

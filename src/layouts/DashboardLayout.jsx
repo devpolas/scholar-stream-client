@@ -1,42 +1,37 @@
 import useAuthContext from "../contexts/useAuthContext";
 import Profile from "../components/profile/Profile";
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "./../hooks/useAxios";
 import StudentDashboard from "../dashboard/StudentDashboard";
 import ModeratorDashboard from "../dashboard/ModeratorDashboard";
 import AdminDashboard from "../dashboard/AdminDashboard";
-import { Outlet } from "react-router";
+import useRole from "../hooks/useRole";
 
 export default function DashboardLayout() {
   const { user } = useAuthContext();
-  const axiosSecure = useAxiosSecure();
-  const { isLoading, data: currentUser } = useQuery({
-    queryKey: ["user"],
-    queryFn: async () => {
-      return await axiosSecure.get(`/users/me`);
-    },
-  });
+
+  const { role, isLoading } = useRole();
 
   if (isLoading) {
-    return <p>Loading.....</p>;
+    return <p>Loading dashboard...</p>;
   }
 
-  const role = currentUser.data?.data?.role;
+  // if (isError) {
+  //   return <p>Failed to load dashboard.</p>;
+  // }
 
-  let dashboard;
-  if (role === "student") {
-    dashboard = <StudentDashboard />;
-  } else if (role === "moderator") {
-    dashboard = <ModeratorDashboard />;
-  } else if (role === "admin") {
-    dashboard = <AdminDashboard />;
-  }
+  const dashboards = {
+    student: <StudentDashboard />,
+    moderator: <ModeratorDashboard />,
+    admin: <AdminDashboard />,
+  };
 
   return (
     <div>
       <Profile user={user} />
-      {dashboard}
-      <Outlet />
+      <div className='mt-4'>
+        {dashboards[role] ?? (
+          <p className='text-red-500'>No dashboard available for this role.</p>
+        )}
+      </div>
     </div>
   );
 }
