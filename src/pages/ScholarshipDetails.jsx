@@ -1,6 +1,15 @@
 import { useParams, useRouteLoaderData } from "react-router";
 import useAxiosSecure from "../hooks/useAxios";
 import toast from "react-hot-toast";
+import {
+  FaUniversity,
+  FaGlobe,
+  FaMapMarkerAlt,
+  FaGraduationCap,
+  FaMoneyBillWave,
+  FaCalendarAlt,
+  FaEnvelope,
+} from "react-icons/fa";
 
 export default function ScholarshipDetails() {
   const axiosSecure = useAxiosSecure();
@@ -12,23 +21,6 @@ export default function ScholarshipDetails() {
   const scholarship = [...data.data].find(
     (el) => parseInt(el._id) === parseInt(id)
   );
-  const {
-    scholarshipName,
-    universityName,
-    universityImage,
-    universityCountry,
-    universityCity,
-    universityWorldRank,
-    subjectCategory,
-    scholarshipCategory,
-    degree,
-    tuitionFees,
-    applicationFees,
-    serviceCharge,
-    applicationDeadline,
-    scholarshipPostDate,
-    postedUserEmail,
-  } = scholarship;
 
   async function handleApplication() {
     try {
@@ -50,91 +42,105 @@ export default function ScholarshipDetails() {
 
   return (
     <div className='max-w-6xl mx-auto px-4 py-10'>
-      {/* Header */}
-      <div className='flex flex-col md:flex-row gap-6 items-start'>
+      {/* University Image */}
+      <div className='w-full'>
         <img
-          src={universityImage}
-          alt={universityName}
-          className='w-full md:w-72 h-48 object-cover rounded-xl shadow-md'
+          src={scholarship?.universityImage}
+          alt={scholarship.universityName}
+          className='w-full h-56 md:h-72 object-cover rounded-lg'
+        />
+      </div>
+
+      {/* Main Info */}
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+        <Info label='Scholarship Name' value={scholarship?.scholarshipName} />
+
+        <Info
+          icon={<FaUniversity />}
+          label='University'
+          value={scholarship?.universityName}
         />
 
-        <div className='flex-1'>
-          <h1 className='text-3xl font-bold'>{scholarshipName}</h1>
-          <p className='text-lg text-gray-600'>{universityName}</p>
+        <Info
+          icon={<FaGlobe />}
+          label='Country'
+          value={scholarship?.universityCountry}
+        />
 
-          <div className='mt-3 space-x-2'>
-            <div className='badge badge-primary'>{scholarshipCategory}</div>
-            <div className='badge badge-secondary'>{degree}</div>
-            <div className='badge badge-accent'>{subjectCategory}</div>
-          </div>
+        <Info
+          icon={<FaMapMarkerAlt />}
+          label='City'
+          value={scholarship?.universityCity}
+        />
 
-          {/* Location */}
-          <p className='mt-3 text-gray-700'>
-            🌍 {universityCity}, {universityCountry}
-          </p>
+        <Info
+          label='World Rank'
+          value={`#${scholarship?.universityWorldRank}`}
+        />
 
-          {/* Rank */}
-          <p className='text-gray-700 font-semibold'>
-            🎓 World Rank: {universityWorldRank}
-          </p>
-        </div>
+        <Info label='Subject Category' value={scholarship?.subjectCategory} />
+
+        <Info
+          label='Scholarship Type'
+          value={scholarship?.scholarshipCategory}
+        />
+
+        <Info
+          icon={<FaGraduationCap />}
+          label='Degree'
+          value={scholarship.degree}
+        />
       </div>
 
-      {/* Divider */}
-      <div className='divider my-8'></div>
+      <div className='divider' />
 
-      {/* Financial Section */}
-      <h2 className='text-2xl font-semibold mb-4'>Fees & Charges</h2>
+      {/* Fees */}
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
+        <Info
+          icon={<FaMoneyBillWave />}
+          label='Tuition Fees'
+          value={
+            scholarship?.tuitionFees
+              ? `$${scholarship?.tuitionFees}`
+              : "Not required"
+          }
+        />
 
-      <div className='grid md:grid-cols-3 gap-6'>
-        {tuitionFees && (
-          <div className='stat bg-base-200 shadow rounded-lg p-4'>
-            <div className='stat-title'>Tuition Fees</div>
-            <div className='stat-value text-primary'>${tuitionFees}</div>
-          </div>
-        )}
+        <Info
+          icon={<FaMoneyBillWave />}
+          label='Application Fees'
+          value={`$${scholarship?.applicationFees}`}
+        />
 
-        <div className='stat bg-base-200 shadow rounded-lg p-4'>
-          <div className='stat-title'>Application Fees</div>
-          <div className='stat-value text-secondary'>${applicationFees}</div>
-        </div>
-
-        <div className='stat bg-base-200 shadow rounded-lg p-4'>
-          <div className='stat-title'>Service Charge</div>
-          <div className='stat-value text-accent'>${serviceCharge}</div>
-        </div>
+        <Info
+          icon={<FaMoneyBillWave />}
+          label='Service Charge'
+          value={`$${scholarship?.serviceCharge}`}
+        />
       </div>
 
-      {/* Divider */}
-      <div className='divider my-8'></div>
+      <div className='divider' />
 
-      {/* Dates Section */}
-      <h2 className='text-2xl font-semibold mb-4'>Important Dates</h2>
+      {/* Dates & User */}
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+        <Info
+          icon={<FaCalendarAlt />}
+          label='Application Deadline'
+          value={scholarship?.applicationDeadline}
+        />
 
-      <div className='grid md:grid-cols-2 gap-6'>
-        <div className='stat bg-base-200 shadow rounded-lg p-4'>
-          <div className='stat-title'>Application Deadline</div>
-          <div className='stat-value text-error'>{applicationDeadline}</div>
-        </div>
+        <Info
+          icon={<FaCalendarAlt />}
+          label='Posted Date'
+          value={scholarship?.scholarshipPostDate}
+        />
 
-        <div className='stat bg-base-200 shadow rounded-lg p-4'>
-          <div className='stat-title'>Posted On</div>
-          <div className='stat-value text-info'>{scholarshipPostDate}</div>
-        </div>
+        <Info
+          icon={<FaEnvelope />}
+          label='Posted By'
+          value={scholarship?.postedUserEmail}
+        />
       </div>
-
-      {/* Divider */}
-      <div className='divider my-8'></div>
-
-      {/* Posted User Info */}
-      <h2 className='text-2xl font-semibold mb-4'>Posted By</h2>
-
-      <div className='bg-base-200 p-5 rounded-lg shadow'>
-        <p className='text-gray-700'>
-          📧 Email: <span className='font-semibold'>{postedUserEmail}</span>
-        </p>
-      </div>
-
       {/* Action Button */}
       <div className='mt-10 flex justify-center'>
         <button
@@ -147,3 +153,13 @@ export default function ScholarshipDetails() {
     </div>
   );
 }
+
+const Info = ({ label, value, icon }) => (
+  <div className='flex gap-3'>
+    {icon && <span className='text-primary mt-1'>{icon}</span>}
+    <div>
+      <p className='text-sm text-gray-500'>{label}</p>
+      <p className='font-medium break-words'>{value}</p>
+    </div>
+  </div>
+);

@@ -18,7 +18,7 @@ export default function SigninWithGoogle() {
         image: user.photoURL,
       });
       toast.success("Login Successful");
-      navigate(location?.state || "/");
+      navigate(location?.state || "/", { replace: true });
     });
   }
 
