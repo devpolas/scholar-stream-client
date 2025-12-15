@@ -2,17 +2,18 @@ import { FcGoogle } from "react-icons/fc";
 import useAuthContext from "../../contexts/useAuthContext";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router";
-import axios from "axios";
+import useAxios from "../../hooks/useAxios";
 
 export default function SigninWithGoogle() {
   const location = useLocation();
   const navigate = useNavigate();
   const { continueWithGoogle } = useAuthContext();
+  const axiosBase = useAxios();
 
   async function handleContinueWithGoogle() {
     continueWithGoogle().then((result) => {
       const user = result.user;
-      axios.post("http://localhost:8000/api/v1/users", {
+      axiosBase.post("/users", {
         name: user.displayName,
         email: user.email,
         image: user.photoURL,

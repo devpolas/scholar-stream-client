@@ -5,13 +5,16 @@ export default function ApplicationsPage() {
   const { isLoading, data: applications } = useCustomQuery({
     path: "applications",
   });
-  console.log(applications);
   if (isLoading) {
     return <p>Loading.....</p>;
   }
   return (
     <div>
-      <ApplicationTable applications={applications} />
+      {applications.length ? (
+        <ApplicationTable applications={applications} />
+      ) : (
+        <p>No application found!</p>
+      )}
     </div>
   );
 }

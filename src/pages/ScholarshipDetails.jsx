@@ -1,5 +1,5 @@
 import { useParams, useRouteLoaderData } from "react-router";
-import useAxiosSecure from "../hooks/useAxios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import {
   FaUniversity,

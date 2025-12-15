@@ -3,7 +3,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { MdPayment } from "react-icons/md";
 import { BsInfoCircle } from "react-icons/bs";
 import { BiCommentAdd } from "react-icons/bi";
-import useAxiosSecure from "../../hooks/useAxios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useRole from "../../hooks/useRole";
 
 export default function ActionsButtons({
@@ -29,7 +29,7 @@ export default function ActionsButtons({
   };
 
   return (
-    <div className='flex gap-4 justify-center items-center text-sm lg:text-lg'>
+    <div className='flex gap-2 justify-center items-center text-sm lg:text-lg'>
       {paymentStatus === "unpaid" && (
         <button title='Pay'>
           <MdPayment

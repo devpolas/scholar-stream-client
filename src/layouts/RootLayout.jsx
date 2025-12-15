@@ -12,7 +12,7 @@ export default function RootLayout() {
   }
 
   return (
-    <div className='min-h-screen flex flex-col max-w-7xl mx-auto'>
+    <div className='min-h-screen flex flex-col max-w-4/5 mx-auto'>
       <Toaster />
       <nav>
         <Navbar />

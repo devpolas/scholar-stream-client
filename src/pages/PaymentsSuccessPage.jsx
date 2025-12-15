@@ -1,11 +1,10 @@
 import { useEffect } from "react";
-import useAxiosSecure from "../hooks/useAxios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 import { useSearchParams } from "react-router";
 
 export default function PaymentsSuccessPage() {
   const [searchParams] = useSearchParams();
   const sessionId = searchParams.get("session_id");
-  console.log(sessionId);
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {

@@ -17,9 +17,9 @@ import PaymentsPage from "../pages/PaymentsPage";
 import PaymentsSuccessPage from "../pages/PaymentsSuccessPage";
 import PaymentsFailedPage from "../pages/PaymentsFailedPage";
 import Dashboard from "../pages/Dashboard";
-
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import AllScholarships from "../pages/AllScholarships";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +71,7 @@ const router = createBrowserRouter([
           },
           { path: "reviews", Component: ReviewsPage },
           { path: "add-scholarship", Component: AddScholarshipPage },
+          { path: "all-scholarships", Component: AllScholarships },
           { path: "users", Component: UsersPage },
           { path: "payments", Component: PaymentsPage },
           { path: "payment-success", Component: PaymentsSuccessPage },

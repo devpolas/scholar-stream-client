@@ -1,24 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import useRole from "../hooks/useRole";
-import useAxiosSecure from "../hooks/useAxios";
+import ReviewsTable from "../components/review/ReviewsTable";
+import useCustomQuery from "./../hooks/useCustomQuery";
 
 export default function ReviewsPage() {
-  let url;
-  const axiosSecure = useAxiosSecure();
-  const { id, role } = useRole();
-  if (role === "student") {
-    url = `/users/${id}/reviews`;
-  } else if (role === "moderator" || role === "admin") {
-    url = "/reviews";
-  }
-  const { data } = useQuery({
-    queryKey: ["reviews", id],
-    queryFn: async () => {
-      const res = await axiosSecure.get(url);
-      return res.data?.data;
-    },
-  });
+  const { data, isLoading } = useCustomQuery({ path: "reviews" });
 
-  console.log(data);
-  return <div>Reviews</div>;
+  if (isLoading) {
+    return <p>Loading.....</p>;
+  }
+
+  return (
+    <div>
+      {data.length ? <ReviewsTable reviews={data} /> : <p>No review found!</p>}
+    </div>
+  );
 }

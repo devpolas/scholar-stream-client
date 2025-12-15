@@ -7,9 +7,10 @@ import { imgUploadToImgBB } from "../utils/http";
 import { updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import axios from "axios";
+import useAxios from "../hooks/useAxios";
 
 export default function SignupPage() {
+  const axiosBase = useAxios();
   const navigate = useNavigate();
   const {
     register,
@@ -31,7 +32,7 @@ export default function SignupPage() {
         photoURL: photoUrl,
       });
 
-      await axios.post("http://localhost:8000/api/v1/users", {
+      await axiosBase.post("/users", {
         name: fullname,
         email,
         image: photoUrl,

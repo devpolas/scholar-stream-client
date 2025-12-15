@@ -1,7 +1,9 @@
 import { AiOutlineFileAdd } from "react-icons/ai";
 import { FaUsersViewfinder } from "react-icons/fa6";
 import { IoHome } from "react-icons/io5";
+import { MdReviews } from "react-icons/md";
 import { GrAppleAppStore } from "react-icons/gr";
+import { IoDocuments } from "react-icons/io5";
 import { Outlet, NavLink } from "react-router";
 
 export default function AdminDashboard() {
@@ -61,6 +63,33 @@ export default function AdminDashboard() {
                 <span className='is-drawer-close:hidden'>Home</span>
               </NavLink>
             </li>
+
+            {/* List item */}
+            <li>
+              <NavLink
+                to={"/dashboard/all-scholarships"}
+                className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
+                data-tip='All Scholarships'
+              >
+                {/* Home icon */}
+                <IoDocuments />
+                <span className='is-drawer-close:hidden'>All Scholarship</span>
+              </NavLink>
+            </li>
+
+            {/* List item */}
+            <li>
+              <NavLink
+                to={"/dashboard/add-scholarship"}
+                className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
+                data-tip='Add Scholarships'
+              >
+                {/* Home icon */}
+                <AiOutlineFileAdd />
+                <span className='is-drawer-close:hidden'>Add Scholarship</span>
+              </NavLink>
+            </li>
+
             {/* List item */}
             <li>
               <NavLink
@@ -77,19 +106,6 @@ export default function AdminDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/add-scholarship"}
-                className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
-                data-tip='Add Scholarship'
-              >
-                {/* Home icon */}
-                <AiOutlineFileAdd />
-                <span className='is-drawer-close:hidden'>Add Scholarship</span>
-              </NavLink>
-            </li>
-
-            {/* List item */}
-            <li>
-              <NavLink
                 to={"/dashboard/users"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Manage Users'
@@ -97,6 +113,19 @@ export default function AdminDashboard() {
                 {/* Settings icon */}
                 <FaUsersViewfinder />
                 <span className='is-drawer-close:hidden'>Manage Users</span>
+              </NavLink>
+            </li>
+
+            {/* List item */}
+            <li>
+              <NavLink
+                to={"/dashboard/reviews"}
+                className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
+                data-tip='Reviews'
+              >
+                {/* Settings icon */}
+                <MdReviews />
+                <span className='is-drawer-close:hidden'>Reviews</span>
               </NavLink>
             </li>
           </ul>

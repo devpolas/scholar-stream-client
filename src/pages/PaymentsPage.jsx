@@ -11,7 +11,11 @@ export default function PaymentsPage() {
   }
   return (
     <div>
-      <PaymentsTable payments={payments} />
+      {payments.length ? (
+        <PaymentsTable payments={payments} />
+      ) : (
+        <p>No payments found</p>
+      )}
     </div>
   );
 }

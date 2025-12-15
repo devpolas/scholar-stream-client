@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "./useAxios";
+import useAxiosSecure from "./useAxiosSecure";
 import useRole from "./useRole";
 
 export default function useCustomQuery({ path }) {

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuthContext from "../contexts/useAuthContext";
-import useAxiosSecure from "./useAxios";
+import useAxiosSecure from "./useAxiosSecure";
 
 export default function useRole() {
   const { user } = useAuthContext();
@@ -27,6 +27,7 @@ export default function useRole() {
   return {
     id,
     role,
+    data,
     isLoading,
     isError,
   };
