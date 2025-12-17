@@ -1,6 +1,9 @@
-import { useParams, useRouteLoaderData } from "react-router";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAxios from "../hooks/useAxios";
+import useAuthContext from "../contexts/useAuthContext";
+import { useLocation, useNavigate, useParams } from "react-router";
 import {
   FaUniversity,
   FaGlobe,
@@ -13,19 +16,34 @@ import {
 
 export default function ScholarshipDetails() {
   const axiosSecure = useAxiosSecure();
-  const data = useRouteLoaderData("root");
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { id } = useParams();
-  const scholarshipId = id;
 
-  const scholarship = [...data.data].find(
-    (el) => parseInt(el._id) === parseInt(id)
-  );
+  const axiosBase = useAxios();
+
+  const { data: scholarship, isLoading } = useQuery({
+    queryKey: ["scholarship", id],
+    queryFn: async () => {
+      const res = await axiosBase.get(`/scholarships/${id}`);
+      return res.data?.data;
+    },
+  });
+
+  if (isLoading) {
+    return <p>Loading.....</p>;
+  }
 
   async function handleApplication() {
     try {
+      if (!user) {
+        navigate("/login", { state: location?.pathname, replace: true });
+        return;
+      }
       const result = await axiosSecure.post(
-        `/scholarships/${scholarshipId}/applications`,
+        `/scholarships/${id}/applications`,
         {}
       );
 

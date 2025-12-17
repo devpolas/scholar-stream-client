@@ -1,6 +1,12 @@
 import ActionsButtons from "../ui/ActionsButtons";
 
-export default function ReviewsTableRow({ review, index }) {
+export default function ReviewsTableRow({
+  review,
+  index,
+  handleDelete,
+  handleEdit,
+  showDetails,
+}) {
   return (
     <tr>
       <th>{index}</th>
@@ -9,7 +15,11 @@ export default function ReviewsTableRow({ review, index }) {
       <td>{review.createAt}</td>
 
       <td>
-        <ActionsButtons />
+        <ActionsButtons
+          onEdit={() => handleEdit(review)}
+          onView={() => showDetails(review)}
+          onDelete={() => handleDelete(review)}
+        />
       </td>
     </tr>
   );

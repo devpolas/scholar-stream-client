@@ -10,20 +10,23 @@ import {
 
 const ApplicationDetails = ({ application }) => {
   const {
-    scholarshipId,
-    userId,
-    userName,
-    userEmail,
+    scholarship,
+    user,
+    applicationStatus,
+    paymentStatus,
+    applicationDate,
+    feedback,
+  } = application;
+
+  const { name, email } = user;
+  const {
+    scholarshipName,
     universityName,
     scholarshipCategory,
     degree,
     applicationFees,
     serviceCharge,
-    applicationStatus = "pending",
-    paymentStatus,
-    applicationDate,
-    feedback,
-  } = application;
+  } = scholarship;
 
   return (
     <div className='max-w-5xl mx-auto p-4'>
@@ -60,10 +63,9 @@ const ApplicationDetails = ({ application }) => {
 
           {/* User Info */}
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-            <InfoItem icon={<FaUser />} label='User Name' value={userName} />
-            <InfoItem label='User Email' value={userEmail} />
-            <InfoItem label='User ID' value={userId} />
-            <InfoItem label='Scholarship ID' value={scholarshipId} />
+            <InfoItem icon={<FaUser />} label='User Name' value={name} />
+            <InfoItem label='User Email' value={email} />
+            <InfoItem label='Scholarship ID' value={scholarshipName} />
           </div>
 
           <div className='divider' />

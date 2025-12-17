@@ -1,6 +1,13 @@
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import ActionsButtons from "../ui/ActionsButtons";
-export default function ApplicationTableRow({ application, index }) {
+export default function ApplicationTableRow({
+  application,
+  index,
+  handleDelete,
+  handleEdit,
+  showDetails,
+  handleComment,
+}) {
   const {
     _id: applicationId,
     scholarship,
@@ -42,6 +49,10 @@ export default function ApplicationTableRow({ application, index }) {
           paymentStatus={paymentStatus}
           applicationStatus={applicationStatus}
           onPay={onPay}
+          onComment={() => handleComment(application)}
+          onDelete={() => handleDelete(application)}
+          onView={() => showDetails(application)}
+          onEdit={() => handleEdit(application)}
         />
       </td>
     </tr>
