@@ -1,6 +1,6 @@
 import { formatTimeDate } from "../../utils/formateTimeDate";
 import ActionsButtons from "./../ui/ActionsButtons";
-export default function ScholarshipsRow({ scholarship, index }) {
+export default function ScholarshipsRow({ scholarship, index, handleEdit }) {
   return (
     <tr>
       <th>{index}</th>
@@ -16,7 +16,7 @@ export default function ScholarshipsRow({ scholarship, index }) {
       <td>{formatTimeDate(scholarship.applicationDeadline)}</td>
       <td>{formatTimeDate(scholarship.scholarshipPostDate)}</td>
       <td>
-        <ActionsButtons />
+        <ActionsButtons onEdit={() => handleEdit(scholarship)} />
       </td>
     </tr>
   );

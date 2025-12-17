@@ -1,11 +1,26 @@
 import { useForm } from "react-hook-form";
 import Input from "../ui/Input";
 import Select from "../ui/Select";
+import { useEffect } from "react";
 
-export default function EditScholarship() {
-  const { register } = useForm({});
+export default function EditScholarship({ onSubmit, scholarship }) {
+  const { register, handleSubmit, reset } = useForm();
+
+  // 🔥 populate form when modal opens
+  useEffect(() => {
+    if (scholarship) {
+      reset({
+        ...scholarship,
+        applicationDeadline: scholarship.applicationDeadline
+          ? new Date(scholarship.applicationDeadline)
+              .toISOString()
+              .split("T")[0]
+          : "",
+      });
+    }
+  }, [scholarship, reset]);
   return (
-    <div>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
         <Input
           label='Scholarship Name'
@@ -33,9 +48,9 @@ export default function EditScholarship() {
           label='Scholarship Category'
           {...register("scholarshipCategory")}
         >
-          <option>Full fund</option>
-          <option>Partial</option>
-          <option>Self-fund</option>
+          <option>Full-Fund</option>
+          <option>Partial-Fund</option>
+          <option>Self-Fund</option>
         </Select>
 
         <Select label='Degree' {...register("degree")}>
@@ -68,6 +83,9 @@ export default function EditScholarship() {
           {...register("applicationDeadline")}
         />
       </div>
-    </div>
+      <button type='submit' className='btn btn-outline btn-secondary mt-4'>
+        Update
+      </button>
+    </form>
   );
 }

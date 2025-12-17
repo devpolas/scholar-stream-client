@@ -43,7 +43,7 @@ export default function ActionsButtons({
       </button>
 
       {(role === "admin" || role === "moderator") && (
-        <button onClick={() => onEdit?.()} title='Edit'>
+        <button onClick={onEdit} title='Edit'>
           <FaEdit className='cursor-pointer hover:text-yellow-600' />
         </button>
       )}
