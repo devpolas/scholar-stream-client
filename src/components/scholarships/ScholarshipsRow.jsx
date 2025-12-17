@@ -5,6 +5,7 @@ export default function ScholarshipsRow({
   index,
   handleEdit,
   showDetails,
+  handleDelete,
 }) {
   return (
     <tr>
@@ -24,6 +25,7 @@ export default function ScholarshipsRow({
         <ActionsButtons
           onEdit={() => handleEdit(scholarship)}
           onView={() => showDetails(scholarship)}
+          onDelete={() => handleDelete(scholarship)}
         />
       </td>
     </tr>

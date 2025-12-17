@@ -3,11 +3,17 @@ import ScholarshipsRow from "./ScholarshipsRow";
 import EditScholarship from "./EditScholarship";
 import ShowScholarshipDetails from "./ShowScholarshipDetails";
 import Modal from "../modal/Modal";
+import Swal from "sweetalert2";
 
 export default function ScholarShipsTable({ scholarships }) {
   const modalRef = useRef(null);
   const [selectedScholarship, setSelectedScholarship] = useState(null);
   const [modalMode, setModalMode] = useState(null);
+
+  const closeModal = () => {
+    modalRef.current?.close();
+    setSelectedScholarship(null);
+  };
 
   const handleEdit = (scholarship) => {
     setModalMode("Edit");
@@ -19,10 +25,25 @@ export default function ScholarShipsTable({ scholarships }) {
     setSelectedScholarship(scholarship);
     modalRef.current?.showModal(); // ✅ now works
   };
-  const closeModal = () => {
-    modalRef.current?.close();
-    setSelectedScholarship(null);
-  };
+  function handleDelete(scholarship) {
+    console.log(scholarship._id);
+    Swal.fire({
+      title: `<p>You won't be able to revert <strong><em>${scholarship.scholarshipName}!</em></strong></p>`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: `${scholarship.scholarshipName} has been deleted.`,
+          icon: "success",
+        });
+      }
+    });
+  }
 
   const handleUpdate = (data) => {
     const payload = {
@@ -76,6 +97,7 @@ export default function ScholarShipsTable({ scholarships }) {
                 key={i + 1}
                 handleEdit={handleEdit}
                 showDetails={showDetails}
+                handleDelete={handleDelete}
               />
             ))}
           </tbody>
