@@ -1,13 +1,21 @@
 import { useRef, useState } from "react";
 import ScholarshipsRow from "./ScholarshipsRow";
 import EditScholarship from "./EditScholarship";
+import ShowScholarshipDetails from "./ShowScholarshipDetails";
 import Modal from "../modal/Modal";
 
 export default function ScholarShipsTable({ scholarships }) {
   const modalRef = useRef(null);
   const [selectedScholarship, setSelectedScholarship] = useState(null);
+  const [modalMode, setModalMode] = useState(null);
 
   const handleEdit = (scholarship) => {
+    setModalMode("Edit");
+    setSelectedScholarship(scholarship);
+    modalRef.current?.showModal(); // ✅ now works
+  };
+  const showDetails = (scholarship) => {
+    setModalMode("Details");
     setSelectedScholarship(scholarship);
     modalRef.current?.showModal(); // ✅ now works
   };
@@ -26,6 +34,18 @@ export default function ScholarShipsTable({ scholarships }) {
 
     closeModal();
   };
+
+  const modalChildren =
+    modalMode === "Edit" ? (
+      <EditScholarship
+        scholarship={selectedScholarship}
+        onSubmit={handleUpdate}
+      />
+    ) : modalMode === "Details" ? (
+      <ShowScholarshipDetails scholarship={selectedScholarship} />
+    ) : (
+      ""
+    );
 
   return (
     <>
@@ -55,6 +75,7 @@ export default function ScholarShipsTable({ scholarships }) {
                 index={i + 1}
                 key={i + 1}
                 handleEdit={handleEdit}
+                showDetails={showDetails}
               />
             ))}
           </tbody>
@@ -62,13 +83,8 @@ export default function ScholarShipsTable({ scholarships }) {
       </div>
 
       <Modal ref={modalRef} onClose={closeModal}>
-        <h3 className='font-bold text-lg mb-4'>Edit Scholarship</h3>
-        {selectedScholarship && (
-          <EditScholarship
-            scholarship={selectedScholarship}
-            onSubmit={handleUpdate}
-          />
-        )}
+        <h3 className='font-bold text-lg mb-4'>{modalMode} Scholarship</h3>
+        {selectedScholarship && modalChildren}
       </Modal>
     </>
   );
