@@ -4,7 +4,7 @@ export default function Select({ label, children, ...props }) {
       <label className='label'>
         <span className='label-text'>{label}</span>
       </label>
-      <select className='select select-bordered w-full' {...props}>
+      <select className='mt-2 select select-bordered w-full' {...props}>
         {children}
       </select>
     </div>

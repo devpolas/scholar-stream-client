@@ -1,6 +1,12 @@
 import ActionsButtons from "../ui/ActionsButtons";
 
-export default function StudentsTableRow({ student, index }) {
+export default function StudentsTableRow({
+  student,
+  index,
+  handleEdit,
+  handleDelete,
+  showDetails,
+}) {
   return (
     <tr>
       <th>{index}</th>
@@ -15,7 +21,11 @@ export default function StudentsTableRow({ student, index }) {
       <td>{student.email}</td>
       <td>{student.role}</td>
       <td>
-        <ActionsButtons />
+        <ActionsButtons
+          onEdit={() => handleEdit(student)}
+          onDelete={() => handleDelete(student)}
+          onView={() => showDetails(student)}
+        />
       </td>
     </tr>
   );

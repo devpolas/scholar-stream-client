@@ -18,12 +18,12 @@ export default function ScholarShipsTable({ scholarships }) {
   const handleEdit = (scholarship) => {
     setModalMode("Edit");
     setSelectedScholarship(scholarship);
-    modalRef.current?.showModal(); // ✅ now works
+    modalRef.current?.showModal();
   };
   const showDetails = (scholarship) => {
     setModalMode("Details");
     setSelectedScholarship(scholarship);
-    modalRef.current?.showModal(); // ✅ now works
+    modalRef.current?.showModal();
   };
   function handleDelete(scholarship) {
     console.log(scholarship._id);
