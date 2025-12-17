@@ -27,18 +27,18 @@ export default function ActionsButtons({
       {(role === "admin" ||
         role === "moderator" ||
         applicationStatus === "pending") && (
-        <button onClick={() => onDelete?.()} title='Delete'>
+        <button onClick={onDelete} title='Delete'>
           <FaRegTrashAlt className='cursor-pointer hover:text-red-600' />
         </button>
       )}
 
-      {applicationStatus === "completed" && (
-        <button onClick={() => onComment?.()} title='Add Comment'>
+      {(role === "student" || applicationStatus === "completed") && (
+        <button onClick={onComment} title='Add Comment'>
           <BiCommentAdd className='cursor-pointer hover:text-blue-600' />
         </button>
       )}
 
-      <button onClick={() => onView?.()} title='View Info'>
+      <button onClick={onView} title='View Info'>
         <BsInfoCircle className='cursor-pointer hover:text-gray-600' />
       </button>
 

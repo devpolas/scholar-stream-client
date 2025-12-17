@@ -5,10 +5,12 @@ import Modal from "../modal/Modal.jsx";
 import ApplicationDetails from "./ApplicationDetails";
 import AddReview from "./../review/AddReview";
 import EditApplication from "./EditApplication.jsx";
+import useAxiosSecure from "../../hooks/useAxiosSecure.jsx";
 export default function ApplicationTable({ applications }) {
   const modalRef = useRef(null);
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [modalMode, setModalMode] = useState(null);
+  const axiosSecure = useAxiosSecure();
 
   const closeModal = () => {
     modalRef.current?.close();
@@ -57,7 +59,10 @@ export default function ApplicationTable({ applications }) {
     closeModal();
   };
 
-  const postReview = (data) => {
+  const postReview = async (data) => {
+    try {
+      const res = await axiosSecure.post();
+    } catch (error) {}
     console.log("comment data for API:", data);
     closeModal();
   };
