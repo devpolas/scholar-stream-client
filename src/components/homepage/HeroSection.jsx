@@ -1,6 +1,11 @@
+import { useNavigate } from "react-router";
 import HeroButton from "../ui/HeroButton";
 import heroImg from "./../../assets/scholarship-for-students.webp";
 export default function HeroSection() {
+  const navigate = useNavigate();
+  function handelClick() {
+    navigate("/all-scholarships");
+  }
   return (
     <div
       className='hero min-h-[40vh]'
@@ -21,7 +26,7 @@ export default function HeroSection() {
             who demonstrate strong academic performance, leadership potential,
             and a commitment to their community.
           </p>
-          <HeroButton />
+          <HeroButton handelClick={handelClick} />
         </div>
       </div>
     </div>

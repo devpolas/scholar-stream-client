@@ -51,6 +51,7 @@ export default function ScholarshipDetails() {
 
       if (result.status === 201) {
         toast.success("Successfully applied!");
+        navigate("/dashboard/applications");
       } else {
         toast.error("Failed to apply!");
       }
