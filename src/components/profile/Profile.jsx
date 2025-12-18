@@ -1,4 +1,7 @@
+import useAuthContext from "../../contexts/useAuthContext";
+
 export default function Profile({ user }) {
+  const { logout } = useAuthContext();
   if (!user) {
     return (
       <div className='flex items-center gap-3'>
@@ -32,7 +35,10 @@ export default function Profile({ user }) {
             </span>
           </span>
         </div>
-        <button className='btn btn-secondary btn-xs sm:btn-sm lg:btn-md'>
+        <button
+          onClick={logout}
+          className='btn btn-secondary btn-xs sm:btn-sm lg:btn-md'
+        >
           Logout
         </button>
       </div>
