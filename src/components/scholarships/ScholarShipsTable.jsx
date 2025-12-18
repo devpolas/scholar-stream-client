@@ -9,11 +9,14 @@ import toast from "react-hot-toast";
 import useCustomQuery from "../../hooks/useCustomQuery";
 
 export default function ScholarShipsTable({ scholarships }) {
-  const { refetch } = useCustomQuery({ path: "scholarships" });
   const axiosSecure = useAxiosSecure();
   const modalRef = useRef(null);
   const [selectedScholarship, setSelectedScholarship] = useState(null);
   const [modalMode, setModalMode] = useState(null);
+  const { refetch } = useCustomQuery({
+    path: "scholarships",
+    key: selectedScholarship?._id,
+  });
 
   const closeModal = () => {
     modalRef.current?.close();
