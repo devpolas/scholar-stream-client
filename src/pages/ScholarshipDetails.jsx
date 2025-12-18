@@ -13,6 +13,7 @@ import {
   FaCalendarAlt,
   FaEnvelope,
 } from "react-icons/fa";
+import { formatTimeDate } from "../utils/formateTimeDate";
 
 export default function ScholarshipDetails() {
   const axiosSecure = useAxiosSecure();
@@ -144,13 +145,13 @@ export default function ScholarshipDetails() {
         <Info
           icon={<FaCalendarAlt />}
           label='Application Deadline'
-          value={scholarship?.applicationDeadline}
+          value={formatTimeDate(scholarship?.applicationDeadline)}
         />
 
         <Info
           icon={<FaCalendarAlt />}
           label='Posted Date'
-          value={scholarship?.scholarshipPostDate}
+          value={formatTimeDate(scholarship?.scholarshipPostDate)}
         />
 
         <Info

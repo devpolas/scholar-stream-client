@@ -4,8 +4,13 @@ import EditScholarship from "./EditScholarship";
 import ShowScholarshipDetails from "./ShowScholarshipDetails";
 import Modal from "../modal/Modal";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import useCustomQuery from "../../hooks/useCustomQuery";
 
 export default function ScholarShipsTable({ scholarships }) {
+  const { refetch } = useCustomQuery({ path: "scholarships" });
+  const axiosSecure = useAxiosSecure();
   const modalRef = useRef(null);
   const [selectedScholarship, setSelectedScholarship] = useState(null);
   const [modalMode, setModalMode] = useState(null);
@@ -26,7 +31,6 @@ export default function ScholarShipsTable({ scholarships }) {
     modalRef.current?.showModal();
   };
   function handleDelete(scholarship) {
-    console.log(scholarship._id);
     Swal.fire({
       title: `<p>You won't be able to revert <strong><em>${scholarship.scholarshipName}!</em></strong></p>`,
       icon: "warning",
@@ -36,6 +40,8 @@ export default function ScholarShipsTable({ scholarships }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        axiosSecure.delete(`/scholarships/${scholarship._id}`);
+        refetch();
         Swal.fire({
           title: "Deleted!",
           text: `${scholarship.scholarshipName} has been deleted.`,
@@ -45,13 +51,20 @@ export default function ScholarShipsTable({ scholarships }) {
     });
   }
 
-  const handleUpdate = (data) => {
+  const handleUpdate = async (data) => {
     const payload = {
       ...data,
       applicationDeadline: new Date(data.applicationDeadline).toISOString(),
     };
-    console.log("Updated data for API:", payload);
-    // TODO: API call here
+    try {
+      await axiosSecure.patch(`/scholarships/${data._id}`, payload);
+      toast.success("successfully updated");
+      refetch();
+    } catch (error) {
+      if (error) {
+        toast.error("fail to update");
+      }
+    }
 
     closeModal();
   };

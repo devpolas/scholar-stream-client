@@ -15,7 +15,7 @@ export default function useCustomQuery({ path }) {
       ? `/${path}`
       : null;
 
-  const { isLoading, data, error } = useQuery({
+  const { isLoading, data, error, refetch } = useQuery({
     queryKey: ["applications", role, id, path],
     enabled: !!url && !isRoleLoading,
     queryFn: async () => {
@@ -24,5 +24,5 @@ export default function useCustomQuery({ path }) {
     },
   });
 
-  return { isLoading, data, error };
+  return { isLoading, data, error, refetch };
 }

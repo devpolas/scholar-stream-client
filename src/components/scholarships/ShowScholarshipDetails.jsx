@@ -7,6 +7,7 @@ import {
   FaCalendarAlt,
   FaEnvelope,
 } from "react-icons/fa";
+import { formatTimeDate } from "../../utils/formateTimeDate";
 export default function ShowScholarshipDetails({ scholarship }) {
   return (
     <div className='max-w-6xl mx-auto px-4 py-10'>
@@ -94,13 +95,13 @@ export default function ShowScholarshipDetails({ scholarship }) {
         <Info
           icon={<FaCalendarAlt />}
           label='Application Deadline'
-          value={scholarship?.applicationDeadline}
+          value={formatTimeDate(scholarship?.applicationDeadline)}
         />
 
         <Info
           icon={<FaCalendarAlt />}
           label='Posted Date'
-          value={scholarship?.scholarshipPostDate}
+          value={formatTimeDate(scholarship?.scholarshipPostDate)}
         />
 
         <Info

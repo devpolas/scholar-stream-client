@@ -11,11 +11,9 @@ export default function EditScholarship({ onSubmit, scholarship }) {
     if (scholarship) {
       reset({
         ...scholarship,
-        applicationDeadline: scholarship.applicationDeadline
-          ? new Date(scholarship.applicationDeadline)
-              .toISOString()
-              .split("T")[0]
-          : "",
+        applicationDeadline: new Date(scholarship.applicationDeadline)
+          .toISOString()
+          .split("T")[0],
       });
     }
   }, [scholarship, reset]);
