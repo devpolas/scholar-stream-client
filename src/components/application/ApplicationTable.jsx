@@ -62,7 +62,6 @@ export default function ApplicationTable({ applications }) {
 
   const handleUpdate = (data) => {
     const { applicationStatus, feedback } = data;
-    console.log("Updated data for API:", data);
     try {
       axiosSecure.patch(`/applications/${data._id}`, {
         applicationStatus,

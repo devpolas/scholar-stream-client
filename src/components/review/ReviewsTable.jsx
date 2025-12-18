@@ -4,11 +4,19 @@ import Swal from "sweetalert2";
 import EditReview from "./EditReview";
 import Modal from "./../modal/Modal";
 import ReviewDetails from "./ReviewDetails";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCustomQuery from "../../hooks/useCustomQuery";
+import toast from "react-hot-toast";
 
 export default function ReviewsTable({ reviews }) {
   const modalRef = useRef(null);
   const [selectedReview, setSelectedReview] = useState(null);
   const [modalMode, setModalMode] = useState(null);
+  const axiosSecure = useAxiosSecure();
+  const { refetch } = useCustomQuery({
+    path: "reviews",
+    key: selectedReview?._id,
+  });
 
   const closeModal = () => {
     modalRef.current?.close();
@@ -26,8 +34,7 @@ export default function ReviewsTable({ reviews }) {
     setSelectedReview(review);
     modalRef.current?.showModal();
   };
-  function handleDelete(review) {
-    console.log(review._id);
+  async function handleDelete(review) {
     Swal.fire({
       title: `<p>You won't be able to revert <strong><em>${review.scholarship.scholarshipName}</em></strong> review!</p>`,
       icon: "warning",
@@ -37,6 +44,7 @@ export default function ReviewsTable({ reviews }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        axiosSecure.delete(`/reviews/${review._id}`).then(() => refetch());
         Swal.fire({
           title: "Deleted!",
           text: `${review.scholarship.scholarshipName} review has been deleted.`,
@@ -46,9 +54,16 @@ export default function ReviewsTable({ reviews }) {
     });
   }
 
-  const handleUpdate = (data) => {
-    console.log("Updated data for API:", data);
-    // TODO: API call here
+  const handleUpdate = async (data) => {
+    try {
+      await axiosSecure.patch(`/reviews/${selectedReview?._id}`, data);
+      toast.success("successfully update");
+      refetch();
+    } catch (error) {
+      if (error) {
+        toast.error("fail to update");
+      }
+    }
 
     closeModal();
   };

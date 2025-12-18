@@ -1,4 +1,5 @@
 import ActionsButtons from "../ui/ActionsButtons";
+import { formatTimeDate } from "./../../utils/formateTimeDate";
 
 export default function ReviewsTableRow({
   review,
@@ -13,7 +14,7 @@ export default function ReviewsTableRow({
       <td>{review.scholarship.scholarshipName}</td>
       <td>{review.comment}</td>
       <td>{review.rating}</td>
-      <td>{review.createAt}</td>
+      <td>{formatTimeDate(review.createAt)}</td>
 
       <td>
         <ActionsButtons
