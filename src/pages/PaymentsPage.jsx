@@ -1,3 +1,4 @@
+import LoadingSpinner from "../components/loaders/LoadingSpinner";
 import PaymentsTable from "../components/payments/PaymentsTable";
 import useCustomQuery from "../hooks/useCustomQuery";
 
@@ -7,7 +8,7 @@ export default function PaymentsPage() {
   });
 
   if (isLoading) {
-    return <p>Loading.....</p>;
+    return <LoadingSpinner />;
   }
   return (
     <div>

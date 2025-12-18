@@ -3,12 +3,17 @@ import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import { Toaster } from "react-hot-toast";
 import useAuthContext from "../contexts/useAuthContext";
+import Skeleton from "../components/loaders/Skeleton";
 
 export default function RootLayout() {
   const { isLoading } = useAuthContext();
 
   if (isLoading) {
-    return <p>Loading.....</p>;
+    return (
+      <div className='h-screen w-full'>
+        <Skeleton />
+      </div>
+    );
   }
 
   return (

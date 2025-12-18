@@ -14,6 +14,7 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 import { formatTimeDate } from "../utils/formateTimeDate";
+import Skeleton from "../components/loaders/Skeleton";
 
 export default function ScholarshipDetails() {
   const axiosSecure = useAxiosSecure();
@@ -34,7 +35,7 @@ export default function ScholarshipDetails() {
   });
 
   if (isLoading) {
-    return <p>Loading.....</p>;
+    return <Skeleton />;
   }
 
   async function handleApplication() {

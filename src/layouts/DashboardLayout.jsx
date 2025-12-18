@@ -4,6 +4,7 @@ import StudentDashboard from "../dashboard/StudentDashboard";
 import ModeratorDashboard from "../dashboard/ModeratorDashboard";
 import AdminDashboard from "../dashboard/AdminDashboard";
 import useRole from "../hooks/useRole";
+import LoadingSpinner from "../components/loaders/LoadingSpinner";
 
 export default function DashboardLayout() {
   const { user } = useAuthContext();
@@ -11,7 +12,7 @@ export default function DashboardLayout() {
   const { role, isLoading } = useRole();
 
   if (isLoading) {
-    return <p>Loading dashboard...</p>;
+    return <LoadingSpinner />;
   }
 
   const dashboards = {

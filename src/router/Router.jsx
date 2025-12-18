@@ -25,10 +25,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
-    hydrateFallbackElement: <p>Loading.....</p>,
     errorElement: <ErrorPage />,
-    id: "root",
-    loader: async () => fetch("http://localhost:8000/api/v1/scholarships"),
     children: [
       {
         index: true,

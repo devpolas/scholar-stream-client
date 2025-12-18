@@ -1,4 +1,5 @@
 import ApplicationTable from "../components/application/ApplicationTable";
+import LoadingSpinner from "../components/loaders/LoadingSpinner";
 import useCustomQuery from "../hooks/useCustomQuery";
 
 export default function ApplicationsPage() {
@@ -6,7 +7,7 @@ export default function ApplicationsPage() {
     path: "applications",
   });
   if (isLoading) {
-    return <p>Loading.....</p>;
+    return <LoadingSpinner />;
   }
   return (
     <div>

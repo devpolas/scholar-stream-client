@@ -1,9 +1,10 @@
+import LoadingSpinner from "../components/loaders/LoadingSpinner";
 import ScholarShipsTable from "../components/scholarships/ScholarShipsTable";
 import useCustomQuery from "./../hooks/useCustomQuery";
 export default function AllScholarships() {
   const { data, isLoading } = useCustomQuery({ path: "scholarships" });
   if (isLoading) {
-    return <p>Loading.....</p>;
+    return <LoadingSpinner />;
   }
 
   return (
