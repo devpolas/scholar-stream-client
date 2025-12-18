@@ -29,9 +29,9 @@ export default function EditStudent({ user, onSubmit }) {
             <p className='text-gray-600 break-all'>{user.email}</p>
             <span className='mt-2'>
               <Select label='Role' {...register("role")}>
-                <option>admin</option>
-                <option>moderator</option>
-                <option>student</option>
+                <option>Admin</option>
+                <option>Moderator</option>
+                <option>Student</option>
               </Select>
             </span>
 

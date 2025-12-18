@@ -7,11 +7,11 @@ export default function useCustomQuery({ path, key = "" }) {
   const { role, id, isLoading: isRoleLoading } = useRole();
 
   const url =
-    role === "student"
+    role === "Student"
       ? id
         ? `/users/${id}/${path}`
         : null
-      : role === "moderator" || role === "admin"
+      : role === "Moderator" || role === "Admin"
       ? `/${path}`
       : null;
 

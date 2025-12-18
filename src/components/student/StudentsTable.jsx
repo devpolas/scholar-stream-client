@@ -5,11 +5,16 @@ import Swal from "sweetalert2";
 import Modal from "../modal/Modal";
 import EditStudent from "./EditStudent";
 import ShowStudentDetails from "./ShowStudentDetails";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useCustomQuery from "./../../hooks/useCustomQuery";
+import toast from "react-hot-toast";
 
 export default function StudentsTable({ users }) {
   const modalRef = useRef(null);
   const [selectedUser, setSelectedUser] = useState(null);
   const [modalMode, setModalMode] = useState(null);
+  const axiosSecure = useAxiosSecure();
+  const { refetch } = useCustomQuery({ path: "users", key: selectedUser?._id });
 
   const { data } = useRole();
   const allUsers = [...users].filter((user) => user._id !== data._id);
@@ -30,8 +35,7 @@ export default function StudentsTable({ users }) {
     modalRef.current?.showModal();
   };
 
-  function handleDelete(user) {
-    console.log(user._id);
+  async function handleDelete(user) {
     Swal.fire({
       title: `<p>You won't be able to revert <strong><em>${user.name}!</em></strong></p>`,
       icon: "warning",
@@ -41,6 +45,7 @@ export default function StudentsTable({ users }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`).then(() => refetch());
         Swal.fire({
           title: "Deleted!",
           text: `${user.name} has been deleted.`,
@@ -50,10 +55,17 @@ export default function StudentsTable({ users }) {
     });
   }
 
-  const handleUpdate = (role) => {
-    console.log("Updated data for API:", role);
-    // TODO: API call here
-
+  const handleUpdate = async (user) => {
+    const { role } = user;
+    try {
+      await axiosSecure.patch(`/users/update-role/${user?._id}`, { role });
+      refetch();
+      toast.success("successfully update");
+    } catch (error) {
+      if (error) {
+        toast.error("fail to update");
+      }
+    }
     closeModal();
   };
 

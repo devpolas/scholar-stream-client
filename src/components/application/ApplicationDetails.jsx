@@ -41,9 +41,9 @@ const ApplicationDetails = ({ application }) => {
             <div className='flex gap-2'>
               <span
                 className={`badge badge-lg ${
-                  applicationStatus === "approved"
+                  applicationStatus === "Completed"
                     ? "badge-success"
-                    : applicationStatus === "rejected"
+                    : applicationStatus === "Rejected"
                     ? "badge-error"
                     : "badge-warning"
                 }`}
@@ -53,7 +53,7 @@ const ApplicationDetails = ({ application }) => {
 
               <span
                 className={`badge badge-lg ${
-                  paymentStatus === "paid" ? "badge-success" : "badge-outline"
+                  paymentStatus === "Paid" ? "badge-success" : "badge-outline"
                 }`}
               >
                 {paymentStatus}

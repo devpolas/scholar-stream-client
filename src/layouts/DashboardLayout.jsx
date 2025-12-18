@@ -14,14 +14,10 @@ export default function DashboardLayout() {
     return <p>Loading dashboard...</p>;
   }
 
-  // if (isError) {
-  //   return <p>Failed to load dashboard.</p>;
-  // }
-
   const dashboards = {
-    student: <StudentDashboard />,
-    moderator: <ModeratorDashboard />,
-    admin: <AdminDashboard />,
+    Student: <StudentDashboard />,
+    Moderator: <ModeratorDashboard />,
+    Admin: <AdminDashboard />,
   };
 
   return (
