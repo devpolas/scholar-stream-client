@@ -26,15 +26,15 @@ export default function EditApplication({ handleUpdate, application }) {
         <div>
           <Select
             label='Application Status'
-            {...register("status", {
+            {...register("applicationStatus", {
               required: "Please select an application status",
             })}
             className='select select-bordered w-full'
           >
-            <option>pending</option>
-            <option>processing</option>
-            <option>completed</option>
-            <option>rejected</option>
+            <option>Pending</option>
+            <option>Processing</option>
+            <option>Completed</option>
+            <option>Rejected</option>
           </Select>
 
           {errors.status && (

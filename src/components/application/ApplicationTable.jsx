@@ -6,11 +6,17 @@ import ApplicationDetails from "./ApplicationDetails";
 import AddReview from "./../review/AddReview";
 import EditApplication from "./EditApplication.jsx";
 import useAxiosSecure from "../../hooks/useAxiosSecure.jsx";
+import toast from "react-hot-toast";
+import useCustomQuery from "../../hooks/useCustomQuery.jsx";
 export default function ApplicationTable({ applications }) {
   const modalRef = useRef(null);
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [modalMode, setModalMode] = useState(null);
   const axiosSecure = useAxiosSecure();
+  const { refetch } = useCustomQuery({
+    path: "applications",
+    key: selectedApplication?._id,
+  });
 
   const closeModal = () => {
     modalRef.current?.close();
@@ -32,8 +38,7 @@ export default function ApplicationTable({ applications }) {
     setSelectedApplication(application);
     modalRef.current?.showModal();
   };
-  function handleDelete(application) {
-    console.log(application._id);
+  async function handleDelete(application) {
     Swal.fire({
       title: `<p>You won't be able to revert <strong><em>${application.scholarship.scholarshipName}!</em></strong></p>`,
       icon: "warning",
@@ -43,6 +48,9 @@ export default function ApplicationTable({ applications }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/applications/${application._id}`)
+          .then(() => refetch());
         Swal.fire({
           title: "Deleted!",
           text: `${application.scholarship.scholarshipName} has been deleted.`,
@@ -53,23 +61,36 @@ export default function ApplicationTable({ applications }) {
   }
 
   const handleUpdate = (data) => {
+    const { applicationStatus, feedback } = data;
     console.log("Updated data for API:", data);
-    // TODO: API call here
+    try {
+      axiosSecure.patch(`/applications/${data._id}`, {
+        applicationStatus,
+        feedback,
+      });
+      toast.success("successfully update");
+      refetch();
+    } catch (error) {
+      if (error) {
+        toast.error("fail to update");
+      }
+    }
 
     closeModal();
   };
 
   const postReview = async (data) => {
     try {
-      const res = await axiosSecure.post(
+      await axiosSecure.post(
         `/scholarships/${selectedApplication.scholarship._id}/reviews`,
         data
       );
-      console.log(res);
+      toast.success("successfully update");
     } catch (error) {
-      console.log(error);
+      if (error) {
+        toast.error("fail to update");
+      }
     }
-    console.log("comment data for API:", data);
     closeModal();
   };
 

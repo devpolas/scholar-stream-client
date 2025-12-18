@@ -40,8 +40,10 @@ export default function ScholarShipsTable({ scholarships }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosSecure.delete(`/scholarships/${scholarship._id}`);
-        refetch();
+        axiosSecure
+          .delete(`/scholarships/${scholarship._id}`)
+          .then(() => refetch());
+
         Swal.fire({
           title: "Deleted!",
           text: `${scholarship.scholarshipName} has been deleted.`,

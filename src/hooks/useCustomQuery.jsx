@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 import useRole from "./useRole";
 
-export default function useCustomQuery({ path }) {
+export default function useCustomQuery({ path, key = "" }) {
   const axiosSecure = useAxiosSecure();
   const { role, id, isLoading: isRoleLoading } = useRole();
 
@@ -16,7 +16,7 @@ export default function useCustomQuery({ path }) {
       : null;
 
   const { isLoading, data, error, refetch } = useQuery({
-    queryKey: ["applications", role, id, path],
+    queryKey: ["applications", role, id, path, key],
     enabled: !!url && !isRoleLoading,
     queryFn: async () => {
       const res = await axiosSecure.get(url);
