@@ -32,7 +32,7 @@ export default function ActionsButtons({
         </button>
       )}
 
-      {(role === "student" || applicationStatus === "completed") && (
+      {role === "student" && applicationStatus === "completed" && (
         <button onClick={onComment} title='Add Comment'>
           <BiCommentAdd className='cursor-pointer hover:text-blue-600' />
         </button>

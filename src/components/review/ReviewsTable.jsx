@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
 import ReviewsTableRow from "./ReviewsTableRow";
 import Swal from "sweetalert2";
-import ReviewCardRHF from "./ReviewCard";
+import EditReview from "./EditReview";
 import Modal from "./../modal/Modal";
+import ReviewDetails from "./ReviewDetails";
 
 export default function ReviewsTable({ reviews }) {
   const modalRef = useRef(null);
@@ -28,7 +29,7 @@ export default function ReviewsTable({ reviews }) {
   function handleDelete(review) {
     console.log(review._id);
     Swal.fire({
-      title: `<p>You won't be able to revert <strong><em>${review.reviewName}!</em></strong></p>`,
+      title: `<p>You won't be able to revert <strong><em>${review.scholarship.scholarshipName}</em></strong> review!</p>`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -38,7 +39,7 @@ export default function ReviewsTable({ reviews }) {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Deleted!",
-          text: `${review.reviewName} has been deleted.`,
+          text: `${review.scholarship.scholarshipName} review has been deleted.`,
           icon: "success",
         });
       }
@@ -54,9 +55,9 @@ export default function ReviewsTable({ reviews }) {
 
   const modalChildren =
     modalMode === "Edit" ? (
-      <ReviewCardRHF review={selectedReview} onSave={handleUpdate} />
+      <EditReview review={selectedReview} onSave={handleUpdate} />
     ) : modalMode === "Details" ? (
-      <ReviewCardRHF review={selectedReview} />
+      <ReviewDetails review={selectedReview} />
     ) : (
       ""
     );
@@ -68,11 +69,11 @@ export default function ReviewsTable({ reviews }) {
           <thead>
             <tr>
               <th>Serial No</th>
-              <th>review Name</th>
+              <th>Scholarship Name</th>
               <th>Comment</th>
               <th>rating</th>
-              <th>Comment</th>
               <th>Created At</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>

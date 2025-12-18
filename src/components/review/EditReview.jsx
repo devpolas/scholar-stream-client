@@ -1,11 +1,19 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-export default function AddReview({ onSave }) {
+export default function EditReview({ review, onSave }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (review) {
+      reset(review);
+    }
+  }, [review, reset]);
 
   return (
     <div className='card bg-base-100 shadow-xl'>
@@ -18,6 +26,7 @@ export default function AddReview({ onSave }) {
               type='radio'
               name='rating'
               value={star}
+              checked={review.rating === star}
               {...register("rating", { required: true })}
               className='mask mask-star-2 bg-warning'
             />

@@ -11,6 +11,7 @@ export default function ReviewsTableRow({
     <tr>
       <th>{index}</th>
       <td>{review.scholarship.scholarshipName}</td>
+      <td>{review.comment}</td>
       <td>{review.rating}</td>
       <td>{review.createAt}</td>
 

@@ -61,8 +61,14 @@ export default function ApplicationTable({ applications }) {
 
   const postReview = async (data) => {
     try {
-      const res = await axiosSecure.post();
-    } catch (error) {}
+      const res = await axiosSecure.post(
+        `/scholarships/${selectedApplication.scholarship._id}/reviews`,
+        data
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
     console.log("comment data for API:", data);
     closeModal();
   };
