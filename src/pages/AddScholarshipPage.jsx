@@ -1,11 +1,30 @@
 import { Controller, useForm } from "react-hook-form";
 import InputField from "./../components/scholarships/InputField";
 import ImagePicker from "../components/imagePicker/ImagePicker";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import { imgUploadToImgBB } from "../utils/http";
+import Select from "./../components/ui/Select";
 
 export default function AddScholarshipPage() {
-  const { control, register, handleSubmit } = useForm();
+  const { control, register, handleSubmit, reset } = useForm();
+  const axiosSecure = useAxiosSecure();
 
-  function onSubmit(data) {
+  async function onSubmit(data) {
+    try {
+      const coverImage = await imgUploadToImgBB(
+        data?.scholarshipName,
+        data?.universityImage[0]
+      );
+      data = { ...data, universityImage: coverImage };
+      await axiosSecure.post("/scholarships", data);
+      reset();
+      toast.success("Successfully created a Scholarship!");
+    } catch (error) {
+      if (error) {
+        toast.error("fail to create scholarship");
+      }
+    }
     console.log(data);
   }
 
@@ -25,31 +44,32 @@ export default function AddScholarshipPage() {
               type='text'
             />
             <InputField
-              {...register("countryName")}
+              {...register("universityCountry")}
               label='Country Name'
               type='text'
             />
             <InputField
-              {...register("cityName")}
+              {...register("universityCity")}
               label='City Name'
               type='text'
             />
             <InputField
-              {...register("worldRank")}
+              {...register("universityWorldRank")}
               label='World Rank'
               type='text'
             />
             <InputField
-              {...register("userEmail")}
+              {...register("postedUserEmail")}
               label='User Email'
               type='email'
             />
             <Controller
-              name='profileImage'
+              name='coverImage'
               control={control}
               defaultValue={null}
               render={({ field }) => (
                 <ImagePicker
+                  {...register("universityImage", { required: true })}
                   onChange={(e) => {
                     const file = e?.target?.files?.[0] || null;
                     field.onChange(file);
@@ -60,24 +80,32 @@ export default function AddScholarshipPage() {
           </div>
           <div className='flex flex-col gap-4'>
             <div className='min-w-2xs'>
-              <InputField
+              <Select
                 {...register("scholarshipCategory")}
                 label='Scholarship Category'
                 type='text'
-              />
+              >
+                <option>Full-Fund</option>
+                <option>Partial-Fund</option>
+                <option>Self-Fund</option>
+              </Select>
               <InputField
                 {...register("subjectCategory")}
                 label='Subject Category'
                 type='text'
               />
-              <InputField {...register("degree")} label='Degree' type='text' />
+              <Select {...register("degree")} label='Degree' type='text'>
+                <option>Diploma</option>
+                <option>Bachelor</option>
+                <option>Masters</option>
+              </Select>
               <InputField
-                {...register("tuitionFee")}
+                {...register("tuitionFees")}
                 label='Tuition Fee'
                 type='number'
               />
               <InputField
-                {...register("applicationFee")}
+                {...register("applicationFees")}
                 label='Application Fee'
                 type='number'
               />
@@ -87,7 +115,7 @@ export default function AddScholarshipPage() {
                 type='number'
               />
               <InputField
-                {...register("deadline")}
+                {...register("applicationDeadline")}
                 label='Deadline'
                 type='date'
               />

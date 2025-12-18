@@ -4,6 +4,7 @@ import { MdPayment } from "react-icons/md";
 import { BsInfoCircle } from "react-icons/bs";
 import { BiCommentAdd } from "react-icons/bi";
 import useRole from "../../hooks/useRole";
+import { useLocation } from "react-router";
 
 export default function ActionsButtons({
   paymentStatus,
@@ -15,6 +16,9 @@ export default function ActionsButtons({
   onPay,
 }) {
   const { role } = useRole();
+  const location = useLocation();
+
+  const isReview = location.pathname === "/dashboard/reviews";
 
   return (
     <div className='flex gap-2 justify-center items-center text-sm lg:text-lg'>
@@ -26,7 +30,8 @@ export default function ActionsButtons({
 
       {(role === "admin" ||
         role === "moderator" ||
-        applicationStatus === "pending") && (
+        applicationStatus === "pending" ||
+        (role === "student" && isReview)) && (
         <button onClick={onDelete} title='Delete'>
           <FaRegTrashAlt className='cursor-pointer hover:text-red-600' />
         </button>
