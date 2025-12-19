@@ -39,7 +39,12 @@ export default function ScholarshipsPage() {
     keepPreviousData: true,
   });
 
-  if (isLoading) return <Skeleton />;
+  if (isLoading)
+    return (
+      <div className='min-h-screen'>
+        <Skeleton />
+      </div>
+    );
 
   return (
     <div className='py-4 px-4'>

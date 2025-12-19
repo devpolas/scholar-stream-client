@@ -19,7 +19,13 @@ export default function HomePage() {
   return (
     <div>
       <HeroSection />
-      {isLoading ? <Skeleton /> : <TopScholarships data={scholarships} />}
+      {isLoading ? (
+        <div className='min-h-[40vh]'>
+          <Skeleton />{" "}
+        </div>
+      ) : (
+        <TopScholarships data={scholarships} />
+      )}
       <StoriesSection />
       <FaqSection />
       <ContactUsSection />

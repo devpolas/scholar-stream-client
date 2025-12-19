@@ -35,7 +35,11 @@ export default function ScholarshipDetails() {
   });
 
   if (isLoading) {
-    return <Skeleton />;
+    return (
+      <div className='min-h-screen'>
+        <Skeleton />
+      </div>
+    );
   }
 
   async function handleApplication() {
