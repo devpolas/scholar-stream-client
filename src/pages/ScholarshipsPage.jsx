@@ -115,7 +115,9 @@ export default function ScholarshipsPage() {
 
       {/* Loading */}
       {isLoading ? (
-        <Skeleton />
+        <div className='h-screen'>
+          <Skeleton />
+        </div>
       ) : (
         <>
           {/* Grid */}

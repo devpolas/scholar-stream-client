@@ -36,7 +36,7 @@ export default function ScholarshipDetails() {
 
   if (isLoading) {
     return (
-      <div className='min-h-screen'>
+      <div className='h-screen'>
         <Skeleton />
       </div>
     );
