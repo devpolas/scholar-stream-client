@@ -1,6 +1,7 @@
 import ScholarshipCard from "../scholarships/ScholarshipCard";
 
 export default function TopScholarships({ data }) {
+  data = data.slice(0, 6); // Show only top 6 scholarships
   return (
     <div className='py-12 px-4'>
       <h2 className='text-4xl font-bold text-center mb-8 text-secondary-content'>
