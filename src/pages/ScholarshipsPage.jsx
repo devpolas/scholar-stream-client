@@ -1,117 +1,157 @@
-import { useState } from "react";
-import ScholarshipCard from "../components/scholarships/ScholarshipCard";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import useAxios from "../hooks/useAxios";
+import ScholarshipCard from "../components/scholarships/ScholarshipCard";
 import Skeleton from "../components/loaders/Skeleton";
+import useAxios from "../hooks/useAxios";
+
+// simple debounce hook
+function useDebounce(value, delay = 500) {
+  const [debounced, setDebounced] = useState(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounced(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+
+  return debounced;
+}
 
 export default function ScholarshipsPage() {
   const axiosBase = useAxios();
 
-  // State for search, filter, sort, pagination
-  const [search, setSearch] = useState("");
-  const [universityCountry, setUniversityCountry] = useState("");
-  const [subjectCategory, setSubjectCategory] = useState("");
-  const [sort, setSort] = useState("-scholarshipPostDate");
+  const [filters, setFilters] = useState({
+    search: "",
+    universityCountry: "",
+    subjectCategory: "",
+    sort: "-scholarshipPostDate",
+  });
+
   const [page, setPage] = useState(1);
   const limit = 9;
 
-  const { data, isLoading } = useQuery({
-    queryKey: [
-      "scholarships",
-      search,
-      universityCountry,
-      subjectCategory,
-      sort,
+  // Debounced search input
+  const debouncedSearch = useDebounce(filters.search);
+
+  // Reset page when filters change
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPage((prev) => (prev === 1 ? prev : 1));
+  }, [
+    debouncedSearch,
+    filters.universityCountry,
+    filters.subjectCategory,
+    filters.sort,
+  ]);
+
+  // Memoized query params
+  const queryParams = useMemo(
+    () => ({
+      search: debouncedSearch,
+      universityCountry: filters.universityCountry,
+      subjectCategory: filters.subjectCategory,
+      sort: filters.sort,
       page,
-    ],
+      limit,
+    }),
+    [debouncedSearch, filters, page]
+  );
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ["scholarships", queryParams],
     queryFn: async () => {
-      const params = {
-        search,
-        universityCountry,
-        subjectCategory,
-        sort,
-        page,
-        limit,
-      };
-      const res = await axiosBase.get("/scholarships", { params });
+      const res = await axiosBase.get("/scholarships", {
+        params: queryParams,
+      });
       return res.data;
     },
     keepPreviousData: true,
   });
 
-  if (isLoading)
-    return (
-      <div className='min-h-screen'>
-        <Skeleton />
-      </div>
-    );
+  const handleChange = (key) => (e) =>
+    setFilters((prev) => ({ ...prev, [key]: e.target.value }));
 
   return (
-    <div className='py-4 px-4'>
+    <div className='py-4 px-4 min-h-screen'>
       <h2 className='text-4xl font-bold text-center mb-8 text-secondary-content'>
         Scholarships
       </h2>
 
-      {/* Filters/Search/Sort */}
+      {/* Filters */}
       <div className='flex flex-wrap gap-4 justify-center mb-6'>
         <input
           type='text'
           placeholder='Search by name, university, or degree'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className='input input-bordered w-full sm:w-auto'
+          value={filters.search}
+          onChange={handleChange("search")}
+          className='input input-bordered w-full sm:w-64'
         />
+
         <input
           type='text'
-          placeholder='Filter by Country'
-          value={universityCountry}
-          onChange={(e) => setUniversityCountry(e.target.value)}
-          className='input input-bordered w-full sm:w-auto'
+          placeholder='Country'
+          value={filters.universityCountry}
+          onChange={handleChange("universityCountry")}
+          className='input input-bordered w-full sm:w-48'
         />
+
         <input
           type='text'
-          placeholder='Filter by Subject'
-          value={subjectCategory}
-          onChange={(e) => setSubjectCategory(e.target.value)}
-          className='input input-bordered w-full sm:w-auto'
+          placeholder='Subject'
+          value={filters.subjectCategory}
+          onChange={handleChange("subjectCategory")}
+          className='input input-bordered w-full sm:w-48'
         />
+
         <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value)}
-          className='select select-bordered w-full sm:w-auto'
+          value={filters.sort}
+          onChange={handleChange("sort")}
+          className='select select-bordered w-full sm:w-48'
         >
           <option value='-scholarshipPostDate'>Latest</option>
-          <option value='applicationFees'>Fees: Low to High</option>
-          <option value='-applicationFees'>Fees: High to Low</option>
+          <option value='applicationFees'>Fees: Low → High</option>
+          <option value='-applicationFees'>Fees: High → Low</option>
         </select>
       </div>
 
-      {/* Scholarship cards grid */}
-      <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-        {data?.data?.length ? (
-          data.data.map((el) => (
-            <ScholarshipCard key={el._id} scholarship={el} />
-          ))
-        ) : (
-          <p className='text-center col-span-full'>No scholarships found</p>
-        )}
-      </div>
+      {/* Loading */}
+      {isLoading ? (
+        <Skeleton />
+      ) : (
+        <>
+          {/* Grid */}
+          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+            {data?.data?.length ? (
+              data.data.map((item) => (
+                <ScholarshipCard key={item._id} scholarship={item} />
+              ))
+            ) : (
+              <p className='text-center col-span-full text-gray-500'>
+                No scholarships found
+              </p>
+            )}
+          </div>
 
-      {/* Pagination */}
-      {data?.totalPages > 1 && (
-        <div className='flex justify-center mt-6 gap-2 flex-wrap'>
-          {Array.from({ length: data.totalPages }, (_, i) => (
-            <button
-              key={i}
-              onClick={() => setPage(i + 1)}
-              className={`btn btn-sm ${
-                page === i + 1 ? "btn-primary" : "btn-outline"
-              }`}
-            >
-              {i + 1}
-            </button>
-          ))}
-        </div>
+          {/* Pagination */}
+          {data?.totalPages > 1 && (
+            <div className='flex justify-center mt-6 gap-2 flex-wrap'>
+              {Array.from({ length: data.totalPages }, (_, i) => {
+                const pageNum = i + 1;
+                return (
+                  <button
+                    key={pageNum}
+                    onClick={() => setPage(pageNum)}
+                    disabled={isFetching}
+                    className={`btn btn-sm ${
+                      page === pageNum ? "btn-primary" : "btn-outline"
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
