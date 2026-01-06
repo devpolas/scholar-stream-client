@@ -38,6 +38,16 @@
 
 ---
 
+## 📂 Root Access
+
+```
+Admin_id: "admin@scholarship.com"
+password: "Admin999!!"
+
+Moderator_id: "moderator@scholarship.com"
+password: "Moderator999!!"
+```
+
 ## 📂 Project Structure (Typical)
 
 ```txt
