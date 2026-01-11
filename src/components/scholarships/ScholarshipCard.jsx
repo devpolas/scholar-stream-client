@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import { Link } from "react-router";
 
 export default function ScholarshipCard({ scholarship }) {
@@ -10,8 +11,27 @@ export default function ScholarshipCard({ scholarship }) {
     universityCity,
     applicationFees,
   } = scholarship;
+
+  const cardVariant = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
   return (
-    <div className='card bg-base-100 shadow-xl hover:shadow-2xl transition duration-300 border border-base-200'>
+    <motion.div
+      key={_id}
+      variants={cardVariant}
+      whileHover={{
+        scale: 1.03,
+        y: -5,
+        boxShadow: "0 20px 30px rgba(0,0,0,0.1)",
+      }}
+      className='card bg-base-100 shadow-xl hover:shadow-2xl transition duration-300 border border-base-200'
+    >
       {/* University Image */}
       <figure>
         <img
@@ -52,6 +72,6 @@ export default function ScholarshipCard({ scholarship }) {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

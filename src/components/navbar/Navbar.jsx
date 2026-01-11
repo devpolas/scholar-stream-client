@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import AvatarWithDropDown from "./AvatarWithDropDown";
 import AuthButtons from "./AuthButtons";
 import useAuthContext from "../../contexts/useAuthContext";
+import ThemeSwitch from "../../theme/ThemeSwitch";
 
 export default function Navbar() {
   const { user, isLoading } = useAuthContext();
@@ -21,7 +22,7 @@ export default function Navbar() {
     </>
   );
   return (
-    <div className='navbar bg-base-200 shadow-sm'>
+    <div className='navbar bg-base-200 shadow-sm z-999'>
       <div className='navbar-start'>
         <div className='dropdown'>
           <div tabIndex={0} role='button' className='btn btn-ghost lg:hidden'>
@@ -34,9 +35,12 @@ export default function Navbar() {
             {links}
           </ul>
         </div>
-        <Link to={"/"} className='btn btn-ghost text-xl'>
-          <img className='w-12' src={logo} alt='Scholar Stream Logo' />
-        </Link>
+        <div className='flex flex-row gap-4'>
+          <Link to={"/"} className='btn btn-ghost text-xl'>
+            <img className='w-12' src={logo} alt='Scholar Stream Logo' />
+          </Link>
+          <ThemeSwitch />
+        </div>
       </div>
       <div className='navbar-center hidden lg:flex'>
         <ul className='menu menu-horizontal px-1'>{links}</ul>
