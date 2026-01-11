@@ -6,7 +6,7 @@ import AuthButtons from "./AuthButtons";
 import useAuthContext from "../../contexts/useAuthContext";
 
 export default function Navbar() {
-  const { user } = useAuthContext();
+  const { user, isLoading } = useAuthContext();
   const links = (
     <>
       <li>
@@ -42,7 +42,13 @@ export default function Navbar() {
         <ul className='menu menu-horizontal px-1'>{links}</ul>
       </div>
       <div className='navbar-end'>
-        {user ? <AvatarWithDropDown /> : <AuthButtons />}
+        {isLoading ? (
+          <span className='loading loading-bars loading-sm'></span>
+        ) : user ? (
+          <AvatarWithDropDown />
+        ) : (
+          <AuthButtons />
+        )}
       </div>
     </div>
   );
