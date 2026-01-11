@@ -17,7 +17,7 @@ export default function HeroSection() {
       <div className='hero-overlay'></div>
       <div className='hero-content text-neutral-content text-center'>
         <div className='max-w-md'>
-          <h1 className='mb-5 text-5xl font-bold text-secondary-content'>
+          <h1 className='mb-5 text-4xl font-bold text-secondary-content'>
             Welcome to <span className='text-green-700'>Scholarship</span>{" "}
             Stream
           </h1>

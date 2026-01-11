@@ -1,2 +1,13 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+@font-face {
+  font-family: "inter";
+  src: url("inter.woff2") format("woff2");
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: "inter", system-ui, sans-serif;
+}
