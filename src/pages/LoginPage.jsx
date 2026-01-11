@@ -9,7 +9,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { handleSubmit, register } = useForm();
-  const { signin } = useAuthContext();
+  const { signin, loginLoading } = useAuthContext();
   function onSubmit(formData) {
     const { email, password } = formData;
     signin(email, password)
@@ -45,7 +45,14 @@ export default function LoginPage() {
             placeholder='Password'
           />
 
-          <button className='btn btn-neutral mt-4 w-full'>Login</button>
+          <button className='btn btn-neutral mt-4 w-full'>
+            <span className='flex flex-row gap-2 items-center'>
+              {loginLoading && (
+                <span className='loading loading-spinner text-primary'></span>
+              )}
+              <span>Login</span>
+            </span>
+          </button>
 
           <SigninWithGoogle />
         </fieldset>

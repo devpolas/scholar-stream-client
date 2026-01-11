@@ -15,6 +15,9 @@ export default function Navbar() {
       <li>
         <Link to={"/all-scholarships"}>All Scholarships</Link>
       </li>
+      <li>
+        <Link to={"/about"}>About Us</Link>
+      </li>
     </>
   );
   return (

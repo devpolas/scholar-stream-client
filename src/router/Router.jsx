@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router";
 
 import RootLayout from "../layouts/RootLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
-
 import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
@@ -17,9 +16,10 @@ import PaymentsPage from "../pages/PaymentsPage";
 import PaymentsSuccessPage from "../pages/PaymentsSuccessPage";
 import PaymentsFailedPage from "../pages/PaymentsFailedPage";
 import Dashboard from "../pages/Dashboard";
-import PublicRoute from "./PublicRoute";
-import PrivateRoute from "./PrivateRoute";
 import AllScholarships from "../pages/AllScholarships";
+import AboutPage from "../pages/AboutPage";
+import PublicLayout from "../layouts/PublicLayout";
+import PrivateLayout from "../layouts/PrivateLayout";
 
 const router = createBrowserRouter([
   {
@@ -31,49 +31,50 @@ const router = createBrowserRouter([
         index: true,
         Component: HomePage,
       },
+      { path: "about", Component: AboutPage },
       {
-        path: "login",
-        element: (
-          <PublicRoute>
-            <LoginPage />
-          </PublicRoute>
-        ),
+        Component: PublicLayout,
+        children: [
+          {
+            path: "login",
+            element: <LoginPage />,
+          },
+          {
+            path: "signup",
+            element: <SignupPage />,
+          },
+        ],
       },
-      {
-        path: "signup",
-        element: (
-          <PublicRoute>
-            <SignupPage />
-          </PublicRoute>
-        ),
-      },
+
       { path: "all-scholarships", Component: ScholarshipsPage },
       { path: "scholarship/:id", Component: ScholarshipDetails },
       {
-        path: "dashboard",
-        element: (
-          <PrivateRoute>
-            <DashboardLayout />
-          </PrivateRoute>
-        ),
+        Component: PrivateLayout,
         children: [
           {
-            index: true,
-            Component: Dashboard,
+            path: "dashboard",
+            element: <DashboardLayout />,
+            children: [
+              {
+                index: true,
+                Component: Dashboard,
+              },
+              {
+                path: "applications",
+                Component: ApplicationsPage,
+              },
+              { path: "reviews", Component: ReviewsPage },
+              { path: "add-scholarship", Component: AddScholarshipPage },
+              { path: "all-scholarships", Component: AllScholarships },
+              { path: "users", Component: UsersPage },
+              { path: "payments", Component: PaymentsPage },
+              { path: "payment-success", Component: PaymentsSuccessPage },
+              { path: "payment-failed", Component: PaymentsFailedPage },
+            ],
           },
-          {
-            path: "applications",
-            Component: ApplicationsPage,
-          },
-          { path: "reviews", Component: ReviewsPage },
-          { path: "add-scholarship", Component: AddScholarshipPage },
-          { path: "all-scholarships", Component: AllScholarships },
-          { path: "users", Component: UsersPage },
-          { path: "payments", Component: PaymentsPage },
-          { path: "payment-success", Component: PaymentsSuccessPage },
-          { path: "payment-failed", Component: PaymentsFailedPage },
         ],
       },
+
       { path: "*", Component: ErrorPage },
     ],
   },

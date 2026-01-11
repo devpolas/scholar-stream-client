@@ -7,7 +7,7 @@ import useAxios from "../../hooks/useAxios";
 export default function SigninWithGoogle() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { continueWithGoogle } = useAuthContext();
+  const { continueWithGoogle, socialLoading } = useAuthContext();
   const axiosBase = useAxios();
 
   async function handleContinueWithGoogle() {
@@ -30,8 +30,15 @@ export default function SigninWithGoogle() {
         onClick={handleContinueWithGoogle}
         className='btn btn-outline'
       >
-        <FcGoogle />
-        Continue with Google
+        <span className='flex flex-row gap-2 items-center'>
+          {socialLoading && (
+            <span className='loading loading-sm loading-spinner text-primary'></span>
+          )}
+          <span className='flex flex-row gap-1 items-center'>
+            <FcGoogle />
+            Continue with Google
+          </span>
+        </span>
       </button>
     </>
   );

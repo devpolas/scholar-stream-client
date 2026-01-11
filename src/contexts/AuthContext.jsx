@@ -14,15 +14,22 @@ export default function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const googleAuthProvider = new GoogleAuthProvider();
   const [isLoading, setIsLoading] = useState(true);
+  const [signupLoading, setSignupLoading] = useState(true);
+  const [loginLoading, setLoginLoading] = useState(true);
+  const [socialLoading, setSocialLoading] = useState(true);
 
   useEffect(function () {
     const unsubscribe = onAuthStateChanged(appAuth, (currentUser) => {
+      setIsLoading(true);
       if (currentUser) {
         setUser(currentUser);
       } else {
         setUser(null);
       }
       setIsLoading(false);
+      setLoginLoading(false);
+      setSignupLoading(false);
+      setSocialLoading(false);
     });
     return () => {
       unsubscribe();
@@ -30,7 +37,7 @@ export default function AuthContextProvider({ children }) {
   }, []);
 
   async function continueWithGoogle() {
-    setIsLoading(true);
+    setSocialLoading(true);
     return await signInWithPopup(appAuth, googleAuthProvider);
   }
 
@@ -43,12 +50,12 @@ export default function AuthContextProvider({ children }) {
   }
 
   async function signup(email, password) {
-    setIsLoading(true);
+    setSignupLoading(true);
     return await createUserWithEmailAndPassword(appAuth, email, password);
   }
 
   async function signin(email, password) {
-    setIsLoading(true);
+    setLoginLoading(true);
     return await signInWithEmailAndPassword(appAuth, email, password);
   }
 
@@ -65,6 +72,9 @@ export default function AuthContextProvider({ children }) {
     signin,
     logout,
     isLoading,
+    signupLoading,
+    loginLoading,
+    socialLoading,
   };
 
   return <AuthContext value={value}>{children}</AuthContext>;

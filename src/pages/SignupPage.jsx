@@ -18,7 +18,7 @@ export default function SignupPage() {
     control,
     formState: { errors },
   } = useForm();
-  const { signup } = useAuthContext();
+  const { signup, signupLoading } = useAuthContext();
   const password = useWatch({ name: "password", control });
   async function onSubmit(formData) {
     const { fullname, email, password, profileImage } = formData;
@@ -39,7 +39,7 @@ export default function SignupPage() {
       });
 
       toast.success("Signup Successful");
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (error) {
       if (error) {
         toast.error("Signup Failed");
@@ -132,7 +132,12 @@ export default function SignupPage() {
           )}
 
           <button type='submit' className='btn btn-neutral mt-4 w-full'>
-            Signup
+            <span className='flex flex-row gap-2 items-center'>
+              {signupLoading && (
+                <span className='loading loading-spinner text-primary'></span>
+              )}
+              <span>Signup</span>
+            </span>
           </button>
 
           <SigninWithGoogle />

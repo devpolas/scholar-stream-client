@@ -5,7 +5,6 @@ import HeroSection from "../components/homepage/HeroSection";
 import StoriesSection from "../components/homepage/StoriesSection";
 import TopScholarships from "../components/homepage/TopScholarships";
 import useAxios from "../hooks/useAxios";
-import Skeleton from "../components/loaders/Skeleton";
 
 export default function HomePage() {
   const axiosBase = useAxios();
@@ -13,19 +12,14 @@ export default function HomePage() {
     queryKey: ["scholarships"],
     queryFn: async () => {
       const res = await axiosBase.get("/scholarships");
-      return res.data?.data;
+      return res.data?.data || [];
     },
   });
+  console.log(isLoading);
   return (
     <div>
       <HeroSection />
-      {isLoading ? (
-        <div className='min-h-[40vh]'>
-          <Skeleton />{" "}
-        </div>
-      ) : (
-        <TopScholarships data={scholarships} />
-      )}
+      <TopScholarships data={scholarships} isLoading={isLoading} />
       <StoriesSection />
       <FaqSection />
       <ContactUsSection />

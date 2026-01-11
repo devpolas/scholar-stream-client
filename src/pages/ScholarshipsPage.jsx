@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import ScholarshipCard from "../components/scholarships/ScholarshipCard";
-import Skeleton from "../components/loaders/Skeleton";
 import useAxios from "../hooks/useAxios";
+import ScholarshipSkeleton from "../components/skeleton/ScholarshipSkeleton";
 
 // simple debounce hook
 function useDebounce(value, delay = 500) {
@@ -115,8 +115,10 @@ export default function ScholarshipsPage() {
 
       {/* Loading */}
       {isLoading ? (
-        <div className='h-screen'>
-          <Skeleton />
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+          {Array.from({ length: 10 }, (_, i) => (
+            <ScholarshipSkeleton key={i} />
+          ))}
         </div>
       ) : (
         <>
