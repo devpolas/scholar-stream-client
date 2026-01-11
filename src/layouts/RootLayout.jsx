@@ -17,7 +17,7 @@ export default function RootLayout() {
   }
 
   return (
-    <div className='min-h-screen flex flex-col max-w-4/5 mx-auto'>
+    <div className='min-h-screen flex flex-col min-w-11/12 md:max-w-11/12 mx-auto'>
       <Toaster />
       <nav>
         <Navbar />

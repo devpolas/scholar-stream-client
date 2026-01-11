@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router";
 import HeroButton from "../ui/HeroButton";
 import heroImg from "./../../assets/scholarship-for-students.webp";
+import { motion } from "motion/react";
 export default function HeroSection() {
   const navigate = useNavigate();
   function handelClick() {
     navigate("/all-scholarships");
   }
   return (
-    <div
+    <motion.div
+      initial={{ y: 100, opacity: 0 }}
+      animate={{ y: 0, opacity: 0.8 }}
+      transition={{ duration: 1 }}
       className='hero min-h-[40vh]'
       style={{
         backgroundImage: `url(${heroImg})`,
@@ -29,6 +33,6 @@ export default function HeroSection() {
           <HeroButton handelClick={handelClick} />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
