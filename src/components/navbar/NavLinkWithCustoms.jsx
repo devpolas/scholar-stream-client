@@ -5,7 +5,7 @@ export default function NavLinkWithCustoms({ children, to }) {
     <NavLink
       className={({ isActive }) =>
         `text-lg   ${
-          isActive ? "bg-blue-400 text-green-100" : "text-green-200"
+          isActive ? "bg-blue-400 text-green-200" : "text-blue-400"
         } `
       }
       to={to}

@@ -27,7 +27,7 @@ export default function ScholarshipsPage() {
   });
 
   const [page, setPage] = useState(1);
-  const limit = 9;
+  const limit = 8;
 
   // Debounced search input
   const debouncedSearch = useDebounce(filters.search);
@@ -115,7 +115,7 @@ export default function ScholarshipsPage() {
 
       {/* Loading */}
       {isLoading ? (
-        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
           {Array.from({ length: 10 }, (_, i) => (
             <ScholarshipSkeleton key={i} />
           ))}
@@ -123,7 +123,7 @@ export default function ScholarshipsPage() {
       ) : (
         <>
           {/* Grid */}
-          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
             {data?.data?.length ? (
               data.data.map((item) => (
                 <ScholarshipCard key={item._id} scholarship={item} />

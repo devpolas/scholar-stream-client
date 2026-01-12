@@ -4,7 +4,7 @@ import useAuthContext from "../../contexts/useAuthContext";
 export default function AvatarWithDropDown() {
   const { user, logout } = useAuthContext();
   return (
-    <div className='dropdown dropdown-end shadow'>
+    <div className='dropdown dropdown-end'>
       <div
         tabIndex={0}
         role='button'
