@@ -25,7 +25,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.6 }}
-            className='mb-5 text-4xl font-bold text-secondary-content'
+            className='text-3xl md:text-4xl font-bold text-center mb-8 text-primary'
           >
             Welcome to <span className='text-green-700'>Scholarship</span>{" "}
             Stream

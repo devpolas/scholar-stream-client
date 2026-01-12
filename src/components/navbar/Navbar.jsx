@@ -5,19 +5,27 @@ import AvatarWithDropDown from "./AvatarWithDropDown";
 import AuthButtons from "./AuthButtons";
 import useAuthContext from "../../contexts/useAuthContext";
 import ThemeSwitch from "../../theme/ThemeSwitch";
+import NavLinkWithCustoms from "./NavLinkWithCustoms";
 
 export default function Navbar() {
   const { user, isLoading } = useAuthContext();
   const links = (
     <>
       <li>
-        <Link to={"/"}>Home</Link>
+        <NavLinkWithCustoms to={"/"}>Home</NavLinkWithCustoms>
       </li>
       <li>
-        <Link to={"/all-scholarships"}>All Scholarships</Link>
+        <NavLinkWithCustoms to={"/all-scholarships"}>
+          All Scholarships
+        </NavLinkWithCustoms>
       </li>
+      {user && (
+        <li>
+          <NavLinkWithCustoms to={"/dashboard"}>Dashboard</NavLinkWithCustoms>
+        </li>
+      )}
       <li>
-        <Link to={"/about"}>About Us</Link>
+        <NavLinkWithCustoms to={"/about"}>About Us</NavLinkWithCustoms>
       </li>
     </>
   );
@@ -35,9 +43,9 @@ export default function Navbar() {
             {links}
           </ul>
         </div>
-        <div className='flex flex-row gap-4'>
+        <div className='flex flex-row gap-2'>
           <Link to={"/"} className='btn btn-ghost text-xl'>
-            <img className='w-12' src={logo} alt='Scholar Stream Logo' />
+            <img className='w-8 md:w-12' src={logo} alt='Scholar Stream Logo' />
           </Link>
           <ThemeSwitch />
         </div>

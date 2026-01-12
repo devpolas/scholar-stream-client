@@ -72,7 +72,7 @@ export default function ScholarshipsPage() {
 
   return (
     <div className='py-4 px-4 min-h-screen'>
-      <h2 className='text-4xl font-bold text-center mb-8 text-secondary-content'>
+      <h2 className='text-3xl md:text-4xl font-bold text-center mb-8 text-primary'>
         Scholarships
       </h2>
 

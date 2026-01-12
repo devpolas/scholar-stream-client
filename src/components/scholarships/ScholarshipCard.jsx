@@ -30,7 +30,7 @@ export default function ScholarshipCard({ scholarship }) {
         y: -5,
         boxShadow: "0 20px 30px rgba(0,0,0,0.1)",
       }}
-      className='card bg-base-100 shadow-xl hover:shadow-2xl transition duration-300 border border-base-200'
+      className='card bg-base-100 shadow-xl hover:shadow-2xl transition duration-300 border-x border-b border-blue-300'
     >
       {/* University Image */}
       <figure>

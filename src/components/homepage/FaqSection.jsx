@@ -1,7 +1,7 @@
 export default function FaqSection() {
   return (
     <div className='max-w-4xl mx-auto px-4 py-12'>
-      <h2 className='text-4xl font-bold text-center mb-8 text-secondary-content'>
+      <h2 className='text-3xl md:text-4xl font-bold text-center mb-8 text-primary'>
         Frequently Asked Questions
       </h2>
 

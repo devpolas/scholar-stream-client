@@ -57,7 +57,7 @@ export default function StoriesSection() {
       variants={container}
       className='max-w-6xl mx-auto px-4 py-12'
     >
-      <h2 className='text-4xl font-bold text-center mb-8 text-secondary-content'>
+      <h2 className='text-3xl md:text-4xl font-bold text-center mb-8 text-primary'>
         Student Success Stories
       </h2>
 
@@ -71,7 +71,7 @@ export default function StoriesSection() {
               y: -5,
               boxShadow: "0 20px 30px rgba(0,0,0,0.1)",
             }}
-            className='card bg-base-100 shadow-xl border border-base-200 hover:shadow-2xl transition'
+            className='card bg-base-100 shadow-xl border border-blue-300 hover:shadow-2xl transition'
           >
             <div className='card-body'>
               {/* User Image */}

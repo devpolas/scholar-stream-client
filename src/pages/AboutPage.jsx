@@ -5,7 +5,7 @@ export default function AboutPage() {
     <div>
       <div className='min-h-screen bg-base-200 flex flex-col items-center px-4 py-12'>
         <div className='text-center max-w-3xl'>
-          <h1 className='text-5xl font-bold text-primary mb-4'>
+          <h1 className='text-3xl md:text-4xl font-bold text-center mb-8 text-primary'>
             About ScholarStream
           </h1>
           <p className='text-lg text-base-content/80'>
@@ -17,7 +17,9 @@ export default function AboutPage() {
         {/* Our Vision Section */}
         <div className='mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl'>
           <div className='flex flex-col justify-center'>
-            <h2 className='text-3xl font-semibold mb-4'>Our Vision</h2>
+            <h2 className='text-3xl md:text-4xl font-bold text-center mb-8 text-primary'>
+              Our Vision
+            </h2>
             <p className='text-base-content/80'>
               We envision a world where every student has equal access to
               education. By bridging the gap between scholarship providers and
@@ -27,7 +29,7 @@ export default function AboutPage() {
           </div>
           <div className='flex justify-center'>
             <img
-              src='https://images.unsplash.com/photo-1581091870625-2fbe6d6de152?auto=format&fit=crop&w=800&q=80'
+              src='https://i.ibb.co.com/DPywwpGh/learning.jpg'
               alt='Students learning'
               className='rounded-lg shadow-lg'
             />
@@ -35,7 +37,7 @@ export default function AboutPage() {
         </div>
 
         <div className='mt-16 max-w-5xl w-full'>
-          <h2 className='text-3xl font-semibold text-center mb-8'>
+          <h2 className='text-3xl md:text-4xl font-bold text-center mb-8 text-primary'>
             What We Do
           </h2>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -61,7 +63,7 @@ export default function AboutPage() {
         </div>
 
         <div className='mt-16 max-w-5xl text-center'>
-          <h2 className='text-3xl font-semibold mb-4'>
+          <h2 className='text-3xl md:text-4xl font-bold text-center mb-8 text-primary'>
             Why We Built ScholarStream
           </h2>
           <p className='text-base-content/80 mb-6'>

@@ -14,23 +14,13 @@ export default function TopScholarships({ data = [], isLoading }) {
     },
   };
 
-  const cardVariant = {
-    hidden: { opacity: 0, y: 50, scale: 0.95 },
-    show: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
   return (
     <motion.div className='py-12 px-4'>
       <motion.h2
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.6 }}
-        className='text-4xl font-bold text-center mb-8 text-secondary-content'
+        className='text-3xl md:text-4xl font-bold text-center mb-8 text-primary'
       >
         Top Scholarships
       </motion.h2>

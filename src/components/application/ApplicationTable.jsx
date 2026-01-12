@@ -8,7 +8,7 @@ import EditApplication from "./EditApplication.jsx";
 import useAxiosSecure from "../../hooks/useAxiosSecure.jsx";
 import toast from "react-hot-toast";
 import useCustomQuery from "../../hooks/useCustomQuery.jsx";
-export default function ApplicationTable({ applications }) {
+export default function ApplicationTable({ applications = [] }) {
   const modalRef = useRef(null);
   const [selectedApplication, setSelectedApplication] = useState(null);
   const [modalMode, setModalMode] = useState(null);
@@ -106,6 +106,8 @@ export default function ApplicationTable({ applications }) {
     ) : (
       ""
     );
+
+  console.log(applications);
   return (
     <>
       <div className='overflow-x-auto'>
@@ -126,17 +128,18 @@ export default function ApplicationTable({ applications }) {
           </thead>
           <tbody>
             {/* row 1 */}
-            {applications.map((application, i) => (
-              <ApplicationTableRow
-                application={application}
-                index={i + 1}
-                key={i + 1}
-                handleDelete={handleDelete}
-                handleEdit={handleEdit}
-                showDetails={showDetails}
-                handleComment={handleComment}
-              />
-            ))}
+            {applications &&
+              applications.map((application, i) => (
+                <ApplicationTableRow
+                  application={application}
+                  index={i + 1}
+                  key={i + 1}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit}
+                  showDetails={showDetails}
+                  handleComment={handleComment}
+                />
+              ))}
           </tbody>
         </table>
       </div>

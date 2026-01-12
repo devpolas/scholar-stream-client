@@ -1,13 +1,18 @@
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import ActionsButtons from "../ui/ActionsButtons";
 export default function ApplicationTableRow({
-  application,
+  application = [],
   index,
   handleDelete,
   handleEdit,
   showDetails,
   handleComment,
 }) {
+  const axiosSecure = useAxiosSecure();
+  if (!application) {
+    return null;
+  }
+
   const {
     _id: applicationId,
     scholarship,
@@ -15,9 +20,6 @@ export default function ApplicationTableRow({
     paymentStatus,
     feedback,
   } = application;
-
-  const axiosSecure = useAxiosSecure();
-
   async function onPay() {
     try {
       const res = await axiosSecure.post(
