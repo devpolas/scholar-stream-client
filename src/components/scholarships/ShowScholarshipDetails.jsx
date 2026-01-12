@@ -23,37 +23,30 @@ export default function ShowScholarshipDetails({ scholarship }) {
       {/* Main Info */}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
         <Info label='Scholarship Name' value={scholarship?.scholarshipName} />
-
         <Info
           icon={<FaUniversity />}
           label='University'
           value={scholarship?.universityName}
         />
-
         <Info
           icon={<FaGlobe />}
           label='Country'
           value={scholarship?.universityCountry}
         />
-
         <Info
           icon={<FaMapMarkerAlt />}
           label='City'
           value={scholarship?.universityCity}
         />
-
         <Info
           label='World Rank'
           value={`#${scholarship?.universityWorldRank}`}
         />
-
         <Info label='Subject Category' value={scholarship?.subjectCategory} />
-
         <Info
           label='Scholarship Type'
           value={scholarship?.scholarshipCategory}
         />
-
         <Info
           icon={<FaGraduationCap />}
           label='Degree'

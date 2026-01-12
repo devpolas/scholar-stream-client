@@ -25,9 +25,9 @@ export default function Footer() {
         </nav>
         <nav>
           <h6 className='footer-title'>Company</h6>
-          <a href='/about' className='link link-hover'>
+          <Link to='/about' className='link link-hover'>
             About us
-          </a>
+          </Link>
           <a href='#' className='link link-hover'>
             Contact
           </a>
@@ -43,9 +43,9 @@ export default function Footer() {
           <a href='#' className='link link-hover'>
             Terms of use
           </a>
-          <a href='#' className='link link-hover'>
+          <Link to='/privacy-terms' className='link link-hover'>
             Privacy policy
-          </a>
+          </Link>
           <a href='#' className='link link-hover'>
             Cookie policy
           </a>

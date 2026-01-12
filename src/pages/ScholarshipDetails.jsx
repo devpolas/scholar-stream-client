@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAxios from "../hooks/useAxios";
 import useAuthContext from "../contexts/useAuthContext";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router";
 import {
   FaUniversity,
   FaGlobe,
@@ -13,6 +13,7 @@ import {
   FaCalendarAlt,
   FaEnvelope,
 } from "react-icons/fa";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import { formatTimeDate } from "../utils/formateTimeDate";
 import Skeleton from "../components/loaders/Skeleton";
 
@@ -67,8 +68,11 @@ export default function ScholarshipDetails() {
 
   return (
     <div className='max-w-6xl mx-auto px-4 py-10'>
+      <Link to='/all-scholarships'>
+        <IoMdArrowRoundBack className='text-3xl text-blue-600' />
+      </Link>
       {/* University Image */}
-      <div className='w-full'>
+      <div className='w-full mt-4'>
         <img
           src={scholarship?.universityImage}
           alt={scholarship.universityName}
@@ -77,7 +81,7 @@ export default function ScholarshipDetails() {
       </div>
 
       {/* Main Info */}
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-4'>
         <Info label='Scholarship Name' value={scholarship?.scholarshipName} />
 
         <Info

@@ -20,6 +20,7 @@ import AllScholarships from "../pages/AllScholarships";
 import AboutPage from "../pages/AboutPage";
 import PublicLayout from "../layouts/PublicLayout";
 import PrivateLayout from "../layouts/PrivateLayout";
+import PrivacyTerms from "../pages/PrivacyTerms";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
 
       { path: "all-scholarships", Component: ScholarshipsPage },
       { path: "scholarship/:id", Component: ScholarshipDetails },
+      { path: "privacy-terms", Component: PrivacyTerms },
       {
         Component: PrivateLayout,
         children: [

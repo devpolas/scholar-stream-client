@@ -5,6 +5,9 @@ import HeroSection from "../components/homepage/HeroSection";
 import StoriesSection from "../components/homepage/StoriesSection";
 import TopScholarships from "../components/homepage/TopScholarships";
 import useAxios from "../hooks/useAxios";
+import FeaturesSection from "../components/homepage/FeaturesSection";
+import StatisticsSection from "../components/homepage/StatisticsSection";
+import NewsletterSection from "../components/homepage/NewsletterSection";
 
 export default function HomePage() {
   const axiosBase = useAxios();
@@ -19,10 +22,13 @@ export default function HomePage() {
   return (
     <div>
       <HeroSection />
+      <StatisticsSection />
       <TopScholarships data={scholarships} isLoading={isLoading} />
+      <FeaturesSection />
       <StoriesSection />
       <FaqSection />
       <ContactUsSection />
+      <NewsletterSection />
     </div>
   );
 }
