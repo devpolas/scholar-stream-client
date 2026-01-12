@@ -4,6 +4,7 @@ import SigninWithGoogle from "../components/socialLogin/SigninWithGoogle";
 import useAuthContext from "../contexts/useAuthContext";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router";
+import Credentials from "../components/socialLogin/Credentials";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function LoginPage() {
       >
         <fieldset className='fieldset glass border-base-300 rounded-box w-xs border p-6 shadow-xl'>
           <legend className='fieldset-legend text-xl'>Login</legend>
-
+          <Credentials />
           <label className='label'>Email</label>
           <input
             {...register("email", { required: true })}
