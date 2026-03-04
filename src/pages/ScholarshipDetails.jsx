@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAxios from "../hooks/useAxios";
 import useAuthContext from "../contexts/useAuthContext";
-import { Link, useLocation, useNavigate, useParams } from "react-router";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   FaUniversity,
   FaGlobe,
@@ -51,7 +51,7 @@ export default function ScholarshipDetails() {
       }
       const result = await axiosSecure.post(
         `/scholarships/${id}/applications`,
-        {}
+        {},
       );
 
       if (result.status === 201) {

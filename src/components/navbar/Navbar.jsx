@@ -1,6 +1,6 @@
 import { SlMenu } from "react-icons/sl";
 import logo from "./../../assets/logo.png";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import AvatarWithDropDown from "./AvatarWithDropDown";
 import AuthButtons from "./AuthButtons";
 import useAuthContext from "../../contexts/useAuthContext";

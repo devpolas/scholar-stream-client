@@ -5,7 +5,7 @@ import ImagePicker from "../components/imagePicker/ImagePicker";
 import useAuthContext from "../contexts/useAuthContext";
 import { imgUploadToImgBB } from "../utils/http";
 import { updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAxios from "../hooks/useAxios";
 

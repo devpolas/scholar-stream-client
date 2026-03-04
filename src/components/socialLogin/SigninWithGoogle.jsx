@@ -1,7 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import useAuthContext from "../../contexts/useAuthContext";
 import toast from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 
 export default function SigninWithGoogle() {

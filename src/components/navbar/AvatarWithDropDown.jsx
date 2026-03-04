@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import useAuthContext from "../../contexts/useAuthContext";
 
 export default function AvatarWithDropDown() {

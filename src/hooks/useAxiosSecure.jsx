@@ -2,8 +2,10 @@ import axios from "axios";
 import { useEffect } from "react";
 import useAuthContext from "../contexts/useAuthContext";
 
+const serverUrl = import.meta.env.VITE_SERVER_URL;
+
 const instance = axios.create({
-  baseURL: "https://scholar-stream-server-jade.vercel.app/api/v1",
+  baseURL: serverUrl,
 });
 
 export default function useAxiosSecure() {

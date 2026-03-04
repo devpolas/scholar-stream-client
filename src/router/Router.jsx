@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter } from "react-router-dom";
 
 import RootLayout from "../layouts/RootLayout";
 import DashboardLayout from "../layouts/DashboardLayout";
@@ -21,63 +21,105 @@ import AboutPage from "../pages/AboutPage";
 import PublicLayout from "../layouts/PublicLayout";
 import PrivateLayout from "../layouts/PrivateLayout";
 import PrivacyTerms from "../pages/PrivacyTerms";
+import AdminDashboard from "./../dashboard/AdminDashboard.jsx";
+import ModeratorDashboard from "./../dashboard/ModeratorDashboard.jsx";
+import StudentDashboard from "./../dashboard/StudentDashboard.jsx";
+import ProtectDashboardLayout from "./../layouts/ProtectDashboardLayout.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: RootLayout,
+    element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
+      { index: true, element: <HomePage /> },
+      { path: "about", element: <AboutPage /> },
+
       {
-        index: true,
-        Component: HomePage,
-      },
-      { path: "about", Component: AboutPage },
-      {
-        Component: PublicLayout,
+        element: <PublicLayout />,
         children: [
-          {
-            path: "login",
-            element: <LoginPage />,
-          },
-          {
-            path: "signup",
-            element: <SignupPage />,
-          },
+          { path: "login", element: <LoginPage /> },
+          { path: "signup", element: <SignupPage /> },
         ],
       },
 
-      { path: "all-scholarships", Component: ScholarshipsPage },
-      { path: "scholarship/:id", Component: ScholarshipDetails },
-      { path: "privacy-terms", Component: PrivacyTerms },
+      { path: "all-scholarships", element: <ScholarshipsPage /> },
+      { path: "scholarship/:id", element: <ScholarshipDetails /> },
+      { path: "privacy-terms", element: <PrivacyTerms /> },
+
       {
-        Component: PrivateLayout,
+        element: <PrivateLayout />,
         children: [
           {
             path: "dashboard",
-            element: <DashboardLayout />,
+            element: <DashboardLayout />, // role redirect only
             children: [
               {
-                index: true,
-                Component: Dashboard,
+                element: <ProtectDashboardLayout allowRole={["Admin"]} />,
+                children: [
+                  {
+                    path: "admin",
+                    element: <AdminDashboard />,
+                    children: [
+                      { index: true, element: <Dashboard /> },
+                      { path: "users", element: <UsersPage /> },
+                      {
+                        path: "all-scholarships",
+                        element: <AllScholarships />,
+                      },
+                      {
+                        path: "add-scholarship",
+                        element: <AddScholarshipPage />,
+                      },
+                      { path: "applications", element: <ApplicationsPage /> },
+                      { path: "reviews", element: <ReviewsPage /> },
+                    ],
+                  },
+                ],
               },
               {
-                path: "applications",
-                Component: ApplicationsPage,
+                element: <ProtectDashboardLayout allowRole={["Moderator"]} />,
+                children: [
+                  {
+                    path: "moderator",
+                    element: <ModeratorDashboard />,
+                    children: [
+                      { index: true, element: <Dashboard /> },
+                      { path: "applications", element: <ApplicationsPage /> },
+                      { path: "reviews", element: <ReviewsPage /> },
+                    ],
+                  },
+                ],
               },
-              { path: "reviews", Component: ReviewsPage },
-              { path: "add-scholarship", Component: AddScholarshipPage },
-              { path: "all-scholarships", Component: AllScholarships },
-              { path: "users", Component: UsersPage },
-              { path: "payments", Component: PaymentsPage },
-              { path: "payment-success", Component: PaymentsSuccessPage },
-              { path: "payment-failed", Component: PaymentsFailedPage },
+              {
+                element: <ProtectDashboardLayout allowRole={["Student"]} />,
+                children: [
+                  {
+                    path: "student",
+                    element: <StudentDashboard />,
+                    children: [
+                      { index: true, element: <Dashboard /> },
+                      { path: "reviews", element: <ReviewsPage /> },
+                      { path: "applications", element: <ApplicationsPage /> },
+                      { path: "payments", element: <PaymentsPage /> },
+                      {
+                        path: "payment-success",
+                        element: <PaymentsSuccessPage />,
+                      },
+                      {
+                        path: "payment-failed",
+                        element: <PaymentsFailedPage />,
+                      },
+                    ],
+                  },
+                ],
+              },
             ],
           },
         ],
       },
 
-      { path: "*", Component: ErrorPage },
+      { path: "*", element: <ErrorPage /> },
     ],
   },
 ]);

@@ -1,34 +1,18 @@
-import useAuthContext from "../contexts/useAuthContext";
-import Profile from "../components/profile/Profile";
-import StudentDashboard from "../dashboard/StudentDashboard";
-import ModeratorDashboard from "../dashboard/ModeratorDashboard";
-import AdminDashboard from "../dashboard/AdminDashboard";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useRole from "../hooks/useRole";
 import LoadingSpinner from "../components/loaders/LoadingSpinner";
 
 export default function DashboardLayout() {
-  const { user } = useAuthContext();
-
   const { role, isLoading } = useRole();
+  const location = useLocation();
 
-  if (isLoading) {
-    return <LoadingSpinner />;
+  const dashboardRole = `${role}`.toLocaleLowerCase();
+
+  if (isLoading) return <LoadingSpinner />;
+
+  if (location.pathname === "/dashboard") {
+    return <Navigate to={`/dashboard/${dashboardRole}`} replace />;
   }
 
-  const dashboards = {
-    Student: <StudentDashboard />,
-    Moderator: <ModeratorDashboard />,
-    Admin: <AdminDashboard />,
-  };
-
-  return (
-    <div>
-      <Profile user={user} />
-      <div className='mt-4'>
-        {dashboards[role] ?? (
-          <p className='text-red-500'>No dashboard available for this role.</p>
-        )}
-      </div>
-    </div>
-  );
+  return <Outlet />;
 }

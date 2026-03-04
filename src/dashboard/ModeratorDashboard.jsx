@@ -1,7 +1,7 @@
 import { GrAppleAppStore } from "react-icons/gr";
 import { IoHome } from "react-icons/io5";
 import { MdReviews } from "react-icons/md";
-import { Outlet, NavLink } from "react-router";
+import { Outlet, NavLink } from "react-router-dom";
 export default function ModeratorDashboard() {
   return (
     <div className='drawer lg:drawer-open'>
@@ -50,7 +50,7 @@ export default function ModeratorDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard"}
+                to={"/dashboard/moderator"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Home'
               >
@@ -62,7 +62,7 @@ export default function ModeratorDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/applications"}
+                to={"/dashboard/moderator/applications"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Applications'
               >
@@ -75,7 +75,7 @@ export default function ModeratorDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/reviews"}
+                to={"/dashboard/moderator/reviews"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Reviews'
               >

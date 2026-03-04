@@ -1,4 +1,4 @@
-import { RouterProvider } from "react-router";
+import { RouterProvider } from "react-router-dom";
 import router from "./router/Router";
 import AuthContextProvider from "./contexts/AuthContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

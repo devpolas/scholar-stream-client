@@ -3,7 +3,7 @@ import graduationCeremony from "./../assets/graduation-ceremony.png";
 import SigninWithGoogle from "../components/socialLogin/SigninWithGoogle";
 import useAuthContext from "../contexts/useAuthContext";
 import toast from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
 import Credentials from "../components/socialLogin/Credentials";
 
 export default function LoginPage() {

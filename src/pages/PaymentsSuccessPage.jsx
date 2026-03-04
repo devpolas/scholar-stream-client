@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import { useSearchParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
 import Skeleton from "../components/loaders/Skeleton";
 
 export default function PaymentsSuccessPage() {
@@ -15,7 +15,7 @@ export default function PaymentsSuccessPage() {
         .get(`/payments/${sessionId}`)
         .then((result) => setPaidInfo(result.data?.data));
     }
-  }, [sessionId]);
+  }, [sessionId, axiosSecure]);
 
   if (!paidInfo) {
     return <Skeleton />;

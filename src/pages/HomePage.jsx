@@ -18,7 +18,7 @@ export default function HomePage() {
       return res.data?.data || [];
     },
   });
-  console.log(isLoading);
+
   return (
     <div>
       <HeroSection />

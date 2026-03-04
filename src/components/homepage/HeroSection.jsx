@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import HeroButton from "../ui/HeroButton";
 import heroImg from "./../../assets/scholarship-for-students.webp";
 import { motion } from "motion/react";

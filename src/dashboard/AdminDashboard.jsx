@@ -4,7 +4,7 @@ import { IoHome } from "react-icons/io5";
 import { MdReviews } from "react-icons/md";
 import { GrAppleAppStore } from "react-icons/gr";
 import { IoDocuments } from "react-icons/io5";
-import { Outlet, NavLink } from "react-router";
+import { Outlet, NavLink } from "react-router-dom";
 
 export default function AdminDashboard() {
   return (
@@ -54,7 +54,7 @@ export default function AdminDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard"}
+                to={"/dashboard/admin"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Home'
               >
@@ -67,7 +67,7 @@ export default function AdminDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/all-scholarships"}
+                to={"/dashboard/admin/all-scholarships"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='All Scholarships'
               >
@@ -80,7 +80,7 @@ export default function AdminDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/add-scholarship"}
+                to={"/dashboard/admin/add-scholarship"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Add Scholarships'
               >
@@ -93,7 +93,7 @@ export default function AdminDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/applications"}
+                to={"/dashboard/admin/applications"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Applications'
               >
@@ -106,7 +106,7 @@ export default function AdminDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/users"}
+                to={"/dashboard/admin/users"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Manage Users'
               >
@@ -119,7 +119,7 @@ export default function AdminDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/reviews"}
+                to={"/dashboard/admin/reviews"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Reviews'
               >

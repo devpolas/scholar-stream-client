@@ -2,7 +2,7 @@ import { IoHome } from "react-icons/io5";
 import { GrAppleAppStore } from "react-icons/gr";
 import { MdReviews } from "react-icons/md";
 import { MdPayments } from "react-icons/md";
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet } from "react-router-dom";
 
 export default function StudentDashboard() {
   return (
@@ -52,7 +52,7 @@ export default function StudentDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard"}
+                to={"/dashboard/student"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Home'
               >
@@ -64,7 +64,7 @@ export default function StudentDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/applications"}
+                to={"/dashboard/student/applications"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Applications'
               >
@@ -77,7 +77,7 @@ export default function StudentDashboard() {
             {/* List item */}
             <li>
               <NavLink
-                to={"/dashboard/reviews"}
+                to={"/dashboard/student/reviews"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Reviews'
               >
@@ -91,7 +91,7 @@ export default function StudentDashboard() {
 
             <li>
               <NavLink
-                to={"/dashboard/payments"}
+                to={"/dashboard/student/payments"}
                 className='is-drawer-close:tooltip is-drawer-close:tooltip-right'
                 data-tip='Payments'
               >
